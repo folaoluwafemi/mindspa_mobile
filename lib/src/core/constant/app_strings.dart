@@ -62,8 +62,20 @@ class AppStrings {
   static const takeCourse =  "Take a course";
 
   ///MindBot
+  static const mindbot = "Mind Bot";
+  static const mindbotText1 = "To help us serve you better, we’d like to ask some questions to guide our assessments";
+  static const mindbotSubText1 = "How are you feeling today?";
+  static const minbotSubText2 = "What’s on your mind?";
+  static const mindbotSubText3 = "What are you thinking about?";
+  static const mindbotSubText4 = "How was your day?";
 
   ///Profile
+  static const profile = "Profile";
+  static const settings = "Settings";
+  static const darkMode = "Dark mode";
+  static const reminder = "Reminder";
+  static const language = "Language";
+  static const notification = "Notification";
 ///Exercise
   static const exerciseText1 = "Physical exercises promote rest, improve sleep, regulate mood and help manage stress.";
   static const yoga = "Yoga";

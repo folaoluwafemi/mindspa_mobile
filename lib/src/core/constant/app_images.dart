@@ -53,4 +53,8 @@ class AppImages {
   static const learnAvatar3 = "assets/svg/Group 75.svg";
   static const learnAvatar4 = "assets/svg/Group 77.svg";
 
+  // MindBot
+  static const mindbotAvatar1 = "assets/svg/chatbot.svg";
+
+
 }
