@@ -1,8 +1,8 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
+
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mindspa_mobile/src/core/constant/app_colors.dart';
+
+import '../../src/core/constant/app_colors.dart';
 
 class ExternalAuthButtons extends StatelessWidget {
   final String iconPath;

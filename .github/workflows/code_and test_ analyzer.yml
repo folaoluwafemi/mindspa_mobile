@@ -23,7 +23,6 @@ jobs:
         channel: 'stable' # 'dev', 'alpha', default to: 'stable'
 
     - run: flutter pub get
-    - run: flutter pub run build_runner build --delete-conflicting-outputs
     - run: flutter analyze
     # - run: flutter test
 

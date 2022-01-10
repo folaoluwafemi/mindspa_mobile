@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mindspa_mobile/src/core/constant/app_colors.dart';
 import 'package:mindspa_mobile/src/core/constant/app_strings.dart';
 
 import '../src/core/routes.dart';
