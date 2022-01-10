@@ -20,7 +20,7 @@ jobs:
    
     - uses: subosito/flutter-action@v1
       with:
-        flutter-version: '2.8.0'
+        channel: 'stable' # 'dev', 'alpha', default to: 'stable'
 
     - run: flutter pub get
     - run: flutter pub run build_runner build --delete-conflicting-outputs
