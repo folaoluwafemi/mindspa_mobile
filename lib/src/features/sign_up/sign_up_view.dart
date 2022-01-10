@@ -15,16 +15,6 @@ class SignUpView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isloading = true;
-
-    void fakeLoading() {
-      Future.delayed(const Duration(seconds: 3)).then((value) {
-        isloading = !isloading;
-
-        print(isloading);
-      });
-    }
-
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
