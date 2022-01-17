@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "128281368656",
+    "project_id": "mindspa-29fbe",
+    "storage_bucket": "mindspa-29fbe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:128281368656:android:0e983974048cc9f276d955",
+        "android_client_info": {
+          "package_name": "com.mindspa.mindspang"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "128281368656-mbu8701cme5oru5956otpqa8rmjft570.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mindspa.mindspang",
+            "certificate_hash": "ad41a4385b14bfa81e30b886ffabf7f52a4d9021"
+          }
+        },
+        {
+          "client_id": "128281368656-tn4378bgvb6eelgm4cva435mcmksbptg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_JlwquzNzGyVndHGBYulyHiumbJ9PGHw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "128281368656-tn4378bgvb6eelgm4cva435mcmksbptg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

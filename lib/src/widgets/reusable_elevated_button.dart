@@ -17,7 +17,8 @@ class ReuseableElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-          primary: AppColors.kAccentColor, shape: const StadiumBorder()),
+          primary: Theme.of(context).colorScheme.secondary,
+          shape: const StadiumBorder()),
       onPressed: onPressed,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 10),
