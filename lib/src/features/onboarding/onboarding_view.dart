@@ -56,22 +56,22 @@ class OnboardingView extends StatelessWidget {
               footer: ReuseableElevatedButton(
                   childText: AppStrings.getStarted,
                   onPressed: () =>
-                      Navigator.pushReplacementNamed(context, Routes.signUp)),
-              decoration:
-                  onboardingPageDecoration(color: AppColors.kGreenAccent),
+                      Navigator.pushReplacementNamed(context, Routes.register)),
+              decoration: onboardingPageDecoration(color: AppColors.dark),
             ),
           ],
           done: const Icon(Icons.arrow_forward_ios),
           onDone: () {},
           skip: const Text(AppStrings.skip),
-          onSkip: () => Navigator.pushReplacementNamed(context, Routes.signUp),
+          onSkip: () =>
+              Navigator.pushReplacementNamed(context, Routes.register),
           showSkipButton: true,
           next: const Icon(Icons.arrow_forward_ios),
-          color: AppColors.kGreenAccent,
+          color: AppColors.dark,
           isProgressTap: false,
           dotsDecorator: DotsDecorator(
-            color: AppColors.kBodyColor,
-            activeColor: AppColors.kGreenAccent,
+            color: AppColors.grey,
+            activeColor: AppColors.lightGreen,
             activeSize: const Size(22, 10),
             activeShape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(24),
@@ -85,9 +85,9 @@ class OnboardingView extends StatelessWidget {
   PageDecoration onboardingPageDecoration({Color? color}) {
     return PageDecoration(
       titleTextStyle: GoogleFonts.poppins(
-          fontSize: 25, fontWeight: FontWeight.bold, color: color),
-      bodyTextStyle:
-          GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.normal),
+          fontSize: 25, fontWeight: FontWeight.bold, color: AppColors.dark),
+      bodyTextStyle: GoogleFonts.poppins(
+          fontSize: 14, fontWeight: FontWeight.normal, color: AppColors.dark),
       titlePadding: const EdgeInsets.only(top: 16, bottom: 10),
     );
   }

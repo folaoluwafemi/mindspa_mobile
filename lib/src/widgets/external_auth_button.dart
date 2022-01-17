@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../src/core/constant/app_colors.dart';
-
 class ExternalAuthButtons extends StatelessWidget {
   final String iconPath;
   final Function() onTap;
@@ -21,7 +19,8 @@ class ExternalAuthButtons extends StatelessWidget {
         decoration: BoxDecoration(
             color: Colors.transparent,
             borderRadius: BorderRadius.circular(100),
-            border: Border.all(width: 3, color: AppColors.kBodyColor)),
+            border: Border.all(
+                width: 3, color: Theme.of(context).colorScheme.onSurface)),
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: SvgPicture.asset(

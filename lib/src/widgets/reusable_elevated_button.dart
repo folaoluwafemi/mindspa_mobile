@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
-import '../core/constant/app_colors.dart';
-
 class ReuseableElevatedButton extends StatelessWidget {
   final String childText;
   final Function() onPressed;
@@ -17,7 +15,8 @@ class ReuseableElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-          primary: AppColors.kAccentColor, shape: const StadiumBorder()),
+          primary: Theme.of(context).colorScheme.secondary,
+          shape: const StadiumBorder()),
       onPressed: onPressed,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 10),
