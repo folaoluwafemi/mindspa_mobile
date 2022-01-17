@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../core/constant/app_colors.dart';
-
 class ReusableTextField extends StatelessWidget {
   final TextInputAction? textInputAction;
   final FocusNode? focusNode;

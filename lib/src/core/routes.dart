@@ -17,9 +17,9 @@ class Routes {
       case onBoarding:
         return MaterialPageRoute(builder: (_) => const OnboardingView());
       case login:
-        return MaterialPageRoute(builder: (_) => LoginView());
+        return MaterialPageRoute(builder: (_) => const LoginView());
       case register:
-        return MaterialPageRoute(builder: (_) => RegisterView());
+        return MaterialPageRoute(builder: (_) => const RegisterView());
       case homeView:
         return MaterialPageRoute(builder: (_) => HomeView());
       default:

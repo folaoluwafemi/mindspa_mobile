@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../src/core/constant/app_colors.dart';
-
 class ExternalAuthButtons extends StatelessWidget {
   final String iconPath;
   final Function() onTap;

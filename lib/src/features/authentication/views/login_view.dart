@@ -4,24 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mindspa_mobile/src/core/utilities/app_functions.dart';
-import 'package:mindspa_mobile/src/features/authentication/model/user_params.dart';
 import 'package:mindspa_mobile/src/features/authentication/notifiers/login_notifier.dart';
-import 'package:mindspa_mobile/src/features/authentication/notifiers/register_notifier.dart';
-import 'package:mindspa_mobile/src/repositories/authentication_repository.dart';
-import 'package:mindspa_mobile/src/services/snackbar_service.dart';
 import 'package:mindspa_mobile/src/widgets/statusbar.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/utilities/validation_extension.dart';
 import 'package:mindspa_mobile/src/core/constant/app_images.dart';
 import 'package:mindspa_mobile/src/core/constant/app_strings.dart';
-import 'package:mindspa_mobile/src/core/routes.dart';
 import 'package:mindspa_mobile/src/widgets/external_auth_button.dart';
 import 'package:mindspa_mobile/src/widgets/reusable_elevated_button.dart';
 import 'package:mindspa_mobile/src/widgets/reusable_text_field.dart';
 
 class LoginView extends StatefulWidget {
-  LoginView({Key? key}) : super(key: key);
+  const LoginView({Key? key}) : super(key: key);
 
   @override
   State<LoginView> createState() => _LoginViewState();

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
-import '../core/constant/app_colors.dart';
-
 class ReuseableElevatedButton extends StatelessWidget {
   final String childText;
   final Function() onPressed;

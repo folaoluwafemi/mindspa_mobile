@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import '../../../core/routes.dart';
 import '../../../core/utilities/base_change_notifier.dart';
 import '../../../repositories/authentication_repository.dart';
-import '../../../services/base/failure.dart';
 import '../../../services/navigation_service.dart';
 import '../../../services/snackbar_service.dart';
 

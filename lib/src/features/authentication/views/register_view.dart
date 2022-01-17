@@ -7,8 +7,6 @@ import 'package:mindspa_mobile/src/core/utilities/app_functions.dart';
 import 'package:mindspa_mobile/src/features/authentication/model/user_params.dart';
 import 'package:mindspa_mobile/src/features/authentication/notifiers/login_notifier.dart';
 import 'package:mindspa_mobile/src/features/authentication/notifiers/register_notifier.dart';
-import 'package:mindspa_mobile/src/repositories/authentication_repository.dart';
-import 'package:mindspa_mobile/src/services/snackbar_service.dart';
 import 'package:mindspa_mobile/src/widgets/statusbar.dart';
 import 'package:provider/provider.dart';
 
@@ -21,7 +19,7 @@ import 'package:mindspa_mobile/src/widgets/reusable_elevated_button.dart';
 import 'package:mindspa_mobile/src/widgets/reusable_text_field.dart';
 
 class RegisterView extends StatefulWidget {
-  RegisterView({Key? key}) : super(key: key);
+  const RegisterView({Key? key}) : super(key: key);
 
   @override
   State<RegisterView> createState() => _RegisterViewState();
@@ -47,7 +45,6 @@ class _RegisterViewState extends State<RegisterView> {
 
   @override
   Widget build(BuildContext context) {
-    var isLoading = true;
     return Statusbar(
       child: Scaffold(
         extendBodyBehindAppBar: true,

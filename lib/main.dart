@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mindspa_mobile/src/core/utilities/app_functions.dart';
 import 'package:mindspa_mobile/src/core/utilities/base_change_notifier.dart';
@@ -15,12 +14,11 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({Key? key}) : super(key: key);
-  var loggedIn = false;
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +41,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: AppStrings.mindSpa,
         theme: AppTheme.lightTheme,
-        initialRoute: loggedIn ? Routes.homeView : Routes.onBoarding,
+        initialRoute: Routes.onBoarding,
         onGenerateRoute: Routes.generateRoute,
         scaffoldMessengerKey:
             context.read<SnackbarService>().scaffoldMessengerKey,
@@ -51,27 +49,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-class AuthenticationWrapper extends StatelessWidget {
-  const AuthenticationWrapper({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: StreamBuilder<User?>(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            loggedIn = true;
-            return Placeholder();
-          } else {
-            loggedIn = false;
-            return Placeholder();
-          }
-        },
-      ),
-    );
-  }
-}
-
-var loggedIn = false;
