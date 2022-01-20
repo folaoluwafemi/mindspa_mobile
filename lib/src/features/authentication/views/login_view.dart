@@ -92,14 +92,15 @@ class _LoginViewState extends State<LoginView> {
                       builder: (context, value, child) => ReusableTextField(
                         obsureText: value.obscurePassword,
                         icon: IconButton(
-                            icon: Icon(
-                              value.obscurePassword
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
-                            ),
-                            onPressed: context
-                                .read<AppFunctions>()
-                                .toggleRevealPasswordButton),
+                          icon: Icon(
+                            value.obscurePassword
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                          ),
+                          onPressed: context
+                              .read<AppFunctions>()
+                              .toggleRevealPasswordButton,
+                        ),
                         controller: passwordController,
                         textInputAction: TextInputAction.done,
                         focusNode: passwordFocusNode,

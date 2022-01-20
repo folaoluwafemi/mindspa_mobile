@@ -70,7 +70,6 @@ class _RegisterViewState extends State<RegisterView> {
           child: Form(
             key: _formKey,
             child: SingleChildScrollView(
-              reverse: true,
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 10, horizontal: 34),

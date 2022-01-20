@@ -27,21 +27,21 @@ class AppTheme {
         ),
       );
 
-  static final ColorScheme _lightColorScheme =
-      const ColorScheme.light().copyWith(
-    primary: AppColors.lightGreen,
-    secondary: AppColors.lightOrange,
-    secondaryVariant: AppColors.lightGreen,
-    onBackground: AppColors.dark,
-    onSurface: AppColors.grey,
-    surface: AppColors.linksColor,
-  );
+  static final ColorScheme _lightColorScheme = const ColorScheme.light()
+      .copyWith(
+          primary: AppColors.green,
+          secondary: AppColors.lightOrange,
+          secondaryVariant: AppColors.green,
+          onBackground: AppColors.dark,
+          onSurface: AppColors.grey,
+          surface: AppColors.linksColor,
+          primaryVariant: AppColors.light);
 
   static TextTheme _textTheme(ColorScheme colorScheme) => TextTheme(
         headline2: GoogleFonts.poppins(
-          fontSize: 60,
+          fontSize: 20,
           fontWeight: FontWeight.bold,
-          color: colorScheme.onBackground,
+          color: colorScheme.primaryVariant,
         ),
         headline4: GoogleFonts.poppins(
           fontSize: 34,

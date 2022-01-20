@@ -4,9 +4,8 @@ class AppColors {
   /// This class holds all the App Colors
   /// Its also has a private constructor so that the class cannot be instantiated outside the class.
   /// You can only access the static fields.
-  //TODO refactor app theme data to reflect the app colors
   AppColors._();
-  static const Color lightGreen = Color(0XFFC5DDC1);
+  static const Color green = Color(0XFF0E402D);
   static const Color lightOrange = Color(0XFFEA7C22);
   static const light = Color(0xFFFFFFFF);
   static const dark = Color(0xFF000000);

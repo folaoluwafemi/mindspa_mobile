@@ -9,7 +9,7 @@ class SnackbarService with ChangeNotifier {
   ) {
     return scaffoldMessengerKey.currentState!.showSnackBar(
       SnackBar(
-        backgroundColor: AppColors.lightGreen,
+        backgroundColor: AppColors.green,
         content: Text(text),
       ),
     );

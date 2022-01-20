@@ -48,6 +48,7 @@ class AppStrings {
   static const displayName = 'Display name';
 
   ///Home
+  static const home = 'Home';
   static const welcome = "Welcome";
   static const canWeHelp = "What can we help with today?";
   static const categories = "Categories";

@@ -11,7 +11,6 @@ class LogoutNotifier extends BaseChangeNotifier {
   ) async {
     try {
       await AuthenticationRepository().logout();
-      Navigator.pop(context);
     } catch (ex) {
       context.read<SnackbarService>().showErrorSnackBar(ex.toString());
     }

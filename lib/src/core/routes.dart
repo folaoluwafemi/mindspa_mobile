@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mindspa_mobile/src/features/authentication/views/login_view.dart';
 import 'package:mindspa_mobile/src/features/authentication/views/register_view.dart';
-import 'package:mindspa_mobile/src/features/home_page/view/home_view.dart';
+
+import 'package:mindspa_mobile/src/features/home_wrapper/view/home_wrapper_view.dart';
 
 import '../features/authentication/views/login_view.dart';
 import '../../src/features/onboarding/onboarding_view.dart';
@@ -21,7 +22,7 @@ class Routes {
       case register:
         return MaterialPageRoute(builder: (_) => const RegisterView());
       case homeView:
-        return MaterialPageRoute(builder: (_) => HomeView());
+        return MaterialPageRoute(builder: (_) => const HomeWrapperView());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

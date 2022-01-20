@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mindspa_mobile/src/core/utilities/app_functions.dart';
 import 'package:mindspa_mobile/src/core/utilities/base_change_notifier.dart';
+import 'package:mindspa_mobile/src/features/startup/views/startup_view.dart';
 import 'package:mindspa_mobile/src/services/navigation_service.dart';
 import 'package:mindspa_mobile/src/services/snackbar_service.dart';
 import 'package:provider/provider.dart';
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: AppStrings.mindSpa,
         theme: AppTheme.lightTheme,
-        initialRoute: Routes.onBoarding,
+        home: const StartupView(),
         onGenerateRoute: Routes.generateRoute,
         scaffoldMessengerKey:
             context.read<SnackbarService>().scaffoldMessengerKey,

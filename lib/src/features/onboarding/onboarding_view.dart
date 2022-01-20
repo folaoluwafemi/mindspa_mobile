@@ -71,7 +71,7 @@ class OnboardingView extends StatelessWidget {
           isProgressTap: false,
           dotsDecorator: DotsDecorator(
             color: AppColors.grey,
-            activeColor: AppColors.lightGreen,
+            activeColor: AppColors.green,
             activeSize: const Size(22, 10),
             activeShape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(24),
