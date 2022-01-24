@@ -1,6 +1,8 @@
 name: Build APK based on label
 
-on: [push, pull_request]
+on:
+  pull_request:
+    types: [labeled]
 
     
 jobs:
