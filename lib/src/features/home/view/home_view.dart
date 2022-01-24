@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mindspa_mobile/src/core/constant/app_colors.dart';
+import 'package:mindspa_mobile/src/core/constant/app_images.dart';
 import 'package:mindspa_mobile/src/core/constant/app_strings.dart';
+import 'package:mindspa_mobile/src/core/constant/dimensions.dart';
+import 'package:mindspa_mobile/src/core/routes.dart';
 import 'package:mindspa_mobile/src/features/home/notifier/home_notifier.dart';
+import 'package:mindspa_mobile/src/widgets/smart_reusable_card.dart';
+import 'package:mindspa_mobile/src/widgets/spacing.dart';
 import 'package:mindspa_mobile/src/widgets/statusbar.dart';
 
 class HomeView extends StatelessWidget {
@@ -8,19 +15,23 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ScrollController scrollController = ScrollController();
+    final searchFieldController = TextEditingController();
     // final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
     return Statusbar(
-        child: Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            automaticallyImplyLeading: false,
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            expandedHeight: height * 0.15,
-            title: Padding(
-              padding: const EdgeInsets.only(top: 15),
-              child: ListTile(
+      child: Scaffold(
+        body: CustomScrollView(
+          controller: scrollController,
+          shrinkWrap: true,
+          slivers: [
+            SliverAppBar(
+              floating: true,
+              pinned: true,
+              snap: false,
+              toolbarHeight: 100,
+              centerTitle: false,
+              title: ListTile(
+                isThreeLine: true,
                 title: Text(
                   '${AppStrings.welcome} ${StartupNotifier().currentUser?.displayName}',
                   style: Theme.of(context).textTheme.headline2,
@@ -32,26 +43,160 @@ class HomeView extends StatelessWidget {
                       ),
                 ),
               ),
-            ),
-          ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate((context, index) {
-              return Card(
-                color: Theme.of(context).colorScheme.primary,
-                child: Row(
-                  children: [Text(categories[index])],
+              bottom: AppBar(
+                title: Container(
+                  decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(10),
+                      )),
+                  width: double.infinity,
+                  height: 40,
+                  child: Center(
+                    child: SearchTextField(
+                      controller: searchFieldController,
+                    ),
+                  ),
                 ),
-              );
-            }, childCount: categories.length),
-          ),
-        ],
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 5, horizontal: 13),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // SearchTextField(controller: searchFieldController),
+                    Text(
+                      AppStrings.categories,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline4!
+                          .copyWith(fontSize: 25),
+                    ),
+                    const Spacing.smallHeight(),
+                    SmartResuableCard(
+                      text: AppStrings.sleepRelaxation,
+                      imagePath: AppImages.homeAvatar1,
+                      color: Theme.of(context).colorScheme.primary,
+                      onTap: () {
+                        Navigator.pushNamed(
+                            context, Routes.sleepAndRelaxaionView);
+                      },
+                    ),
+                    const Spacing.smallHeight(),
+                    SmartResuableCard(
+                      text: AppStrings.nutritionGuide,
+                      imagePath: AppImages.homeAvatar2,
+                      color: Theme.of(context).colorScheme.secondary,
+                      onTap: () {
+                        Navigator.pushNamed(context, Routes.nutritionView);
+                      },
+                    ),
+                    const Spacing.smallHeight(),
+                    SmartResuableCard(
+                      text: AppStrings.exercise,
+                      imagePath: AppImages.homeAvatar,
+                      color: Theme.of(context).colorScheme.primary,
+                      onTap: () {
+                        Navigator.pushNamed(context, Routes.exerciseView);
+                      },
+                    ),
+                    const Spacing.mediumHeight(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            AppStrings.explore,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline4!
+                                .copyWith(fontSize: 19),
+                          ),
+                          Directionality(
+                            textDirection: TextDirection.rtl,
+                            child: TextButton.icon(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.arrow_back,
+                                color: Theme.of(context).colorScheme.onSurface,
+                              ),
+                              label: Text(
+                                AppStrings.seeAll,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText2!
+                                    .copyWith(fontSize: 15),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 200,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          for (var i = 0; i < 8; i++)
+                            Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 5),
+                              decoration: BoxDecoration(
+                                  color: Theme.of(context).colorScheme.primary,
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(10))),
+                              child: SvgPicture.asset(AppImages.homeAvatar1),
+                            )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
-    ));
+    );
   }
 }
 
-final categories = [
-  AppStrings.sleepRelaxation,
-  AppStrings.nutritionGuide,
-  AppStrings.exercise,
-];
+class SearchTextField extends StatelessWidget {
+  final TextEditingController controller;
+
+  const SearchTextField({Key? key, required this.controller}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+        boxShadow: [AppColors.defaultShadow],
+      ),
+      child: TextField(
+        controller: controller,
+        textInputAction: TextInputAction.search,
+        decoration: InputDecoration(
+          contentPadding: const EdgeInsets.only(
+            bottom: 16,
+            right: Dimensions.medium,
+          ),
+          fillColor: Colors.white,
+          filled: true,
+          hintText: 'Search',
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(32),
+            borderSide: BorderSide.none,
+          ),
+          prefixIcon: const Icon(Icons.search_sharp),
+          prefixIconConstraints: const BoxConstraints(
+            minWidth: 64,
+          ),
+        ),
+      ),
+    );
+  }
+}

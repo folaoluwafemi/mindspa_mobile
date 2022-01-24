@@ -32,7 +32,7 @@ class LoginNotifier extends BaseChangeNotifier {
         password: password,
       );
 
-      Navigator.pushNamed(context, Routes.homeView);
+      Navigator.pushNamed(context, Routes.homeWrapperView);
     } catch (ex) {
       context.read<SnackbarService>().showErrorSnackBar(ex.toString());
     }
@@ -43,7 +43,7 @@ class LoginNotifier extends BaseChangeNotifier {
       final user = await authenticationRepository.loginWithGoogle();
 
       if (user != null) {
-        Navigator.pushReplacementNamed(context, Routes.homeView);
+        Navigator.pushReplacementNamed(context, Routes.homeWrapperView);
       } else {
         snackbarService.showErrorSnackBar('No email selected');
       }

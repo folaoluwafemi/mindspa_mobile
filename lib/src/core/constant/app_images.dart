@@ -34,8 +34,14 @@ class AppImages {
   static const exerciseAvatar5 =
       "assets/svg/emojione-monotone_boxing-glove.svg";
 
+  // static const excerciseYoga = 'assets/svg/exerciseAvatar2.svg';
+  // static const excerciseLift = 'assets/svg/exercise1Avatar.svg';
+  // static const
+
   // Nutrition Avatar
   static const nutritionMain = "assets/svg/Watermelon-amico 1.svg";
+  static const nutritionBreakFast = 'assets/svg/nutritionBreakfast.svg';
+  static const breakFast = 'assets/png/nutritionBreakfast.png';
 
   //community Avatar
   static const communityMain = "assets/svg/Connected world-amico 1.svg";
@@ -50,6 +56,11 @@ class AppImages {
   static const learnAvatar2 = "assets/svg/Online article-amico 2.svg";
   static const learnAvatar3 = "assets/svg/Group 75.svg";
   static const learnAvatar4 = "assets/svg/Group 77.svg";
+
+  // For You
+  static const forYouHeadphones = 'assets/png/foryouHeadphones.png';
+  static const forYouBooks = 'assets/png/forYouBooks.png';
+  static const forYouCourses = 'assets/png/foryoucourses.png';
 
   // MindBot
   static const mindbotAvatar1 = "assets/svg/chatbot.svg";
