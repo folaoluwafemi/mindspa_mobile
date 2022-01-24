@@ -7,7 +7,7 @@ on: [push, pull_request]
 jobs:
   build:
     # This job will run on windows virtual machine
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       # The branch or tag ref that triggered the workflow will be checked out.
