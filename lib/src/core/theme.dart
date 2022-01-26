@@ -19,11 +19,7 @@ class AppTheme {
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
               minimumSize: const Size.fromHeight(48),
-              shape: const StadiumBorder()
-              // RoundedRectangleBorder(
-              //   borderRadius: BorderRadius.circular(24),
-              // ),
-              ),
+              shape: const StadiumBorder()),
         ),
       );
 
@@ -31,33 +27,40 @@ class AppTheme {
       const ColorScheme.light().copyWith(
     primary: AppColors.green,
     onPrimary: AppColors.lightGreen,
-    secondary: AppColors.lightOrange,
-    onSecondary: AppColors.weirdGrey,
-    secondaryVariant: AppColors.green,
-    onBackground: AppColors.dark,
-    onSurface: AppColors.grey,
+    secondary: AppColors.lightGreenVariant,
+    secondaryVariant: AppColors.grey,
+    onSurface: AppColors.lightGreenVariant,
     surface: AppColors.linksColor,
     primaryVariant: AppColors.light,
+
   );
 
   static TextTheme _textTheme(ColorScheme colorScheme) => TextTheme(
+       headline1: GoogleFonts.poppins(
+         fontSize: 24,
+         fontWeight: FontWeight.w400,
+         color: colorScheme.primaryVariant
+       ),
         headline2: GoogleFonts.poppins(
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
+          fontSize: 18,
+          fontWeight: FontWeight.w400,
+          color: colorScheme.primaryVariant
+        ),
+        headline3: GoogleFonts.poppins(
+          fontSize: 16,
+          fontWeight: FontWeight.w400,
           color: colorScheme.primaryVariant,
         ),
         headline4: GoogleFonts.poppins(
-          fontSize: 34,
-          fontWeight: FontWeight.w500,
-          color: colorScheme.onBackground,
-        ),
-        headline6: GoogleFonts.poppins(
-          fontSize: 20,
+          fontSize: 14,
           fontWeight: FontWeight.w400,
-          color: colorScheme.onBackground,
         ),
+          headline5: GoogleFonts.poppins(
+          fontSize: 12
+        ),
+
         bodyText1: GoogleFonts.poppins(
-          fontSize: 16,
+          fontSize: 14,
           fontWeight: FontWeight.w400,
           color: colorScheme.onBackground,
         ),
