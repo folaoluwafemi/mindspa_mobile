@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: AppStrings.mindSpa,
       theme: AppTheme.lightTheme,
-      home: const StartupView(),
+      // home: const StartupView(),
       onGenerateRoute: StackedRouter().onGenerateRoute,
       scaffoldMessengerKey: SnackbarServices.scaffoldMessengerKey,
       navigatorKey: StackedService.navigatorKey,

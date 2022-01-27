@@ -13,12 +13,12 @@ class LoginViewModel extends BaseViewModel {
   final _snackbarService = locator<SnackbarServices>();
   final _authenticationService = locator<AuthenticationServices>();
 
-  bool _passwordVisible = true;
+  bool _obsurePassword = true;
 
-  bool get passwordVisible => _passwordVisible;
+  bool get obscurePassword => _obsurePassword;
 
-  void togglePasswordVisibility() {
-    _passwordVisible = !_passwordVisible;
+  void toggleRevealPasswordButton() {
+    _obsurePassword = !_obsurePassword;
     notifyListeners();
   }
 

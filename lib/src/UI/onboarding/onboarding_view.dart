@@ -1,99 +1,147 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:mindspa_mobile/src/UI/onboarding/onboarding_viewmodel.dart';
 import 'package:mindspa_mobile/src/core/constant/app_colors.dart';
 import 'package:mindspa_mobile/src/core/constant/app_images.dart';
 import 'package:mindspa_mobile/src/core/constant/app_strings.dart';
-import 'package:mindspa_mobile/src/widgets/reusable_elevated_button.dart';
+import 'package:mindspa_mobile/src/widgets/spacing.dart';
+import 'package:mindspa_mobile/src/widgets/statusbar.dart';
 import 'package:stacked/stacked.dart';
 
-class OnboardingView extends StatelessWidget {
+class OnboardingView extends StatefulWidget {
   const OnboardingView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return ViewModelBuilder<OnboardingViewModel>.reactive(
-      viewModelBuilder: () => OnboardingViewModel(),
-      builder:
-          (BuildContext context, OnboardingViewModel model, Widget? child) =>
-              Scaffold(
-        body: SafeArea(
-            child: Padding(
-          padding: const EdgeInsets.only(bottom: 60, top: 80),
-          child: IntroductionScreen(
-            pages: [
-              PageViewModel(
-                title: AppStrings.onBoardingText1,
-                body: AppStrings.onBoardingSubText1,
-                image: SvgPicture.asset(
-                  AppImages.onBoardingAvatar1,
-                  fit: BoxFit.cover,
-                ),
-                decoration: onboardingPageDecoration(),
-              ),
-              PageViewModel(
-                title: AppStrings.onBoardingText2,
-                body: AppStrings.onBoardingSubText2,
-                image: SvgPicture.asset(
-                  AppImages.onBoardingAvatar2,
-                  fit: BoxFit.cover,
-                ),
-                decoration: onboardingPageDecoration(),
-              ),
-              PageViewModel(
-                title: AppStrings.onBoardingText3,
-                body: AppStrings.onBoardingSubText3,
-                image: SvgPicture.asset(
-                  AppImages.onBoardingAvatar3,
-                  fit: BoxFit.cover,
-                ),
-                decoration: onboardingPageDecoration(),
-              ),
-              PageViewModel(
-                title: AppStrings.onBoardingText4,
-                body: AppStrings.onBoardingSubText4,
-                image: SvgPicture.asset(
-                  AppImages.onBoardingAvatar1,
-                  fit: BoxFit.cover,
-                ),
-                footer: ReuseableElevatedButton(
-                  childText: AppStrings.getStarted,
-                  onPressed: () => model.navigateToRegistration(),
-                ),
-                decoration: onboardingPageDecoration(color: AppColors.dark),
-              ),
-            ],
-            done: const Icon(Icons.arrow_forward_ios),
-            onDone: () {},
-            skip: const Text(AppStrings.skip),
-            onSkip: () => model.navigateToRegistration(),
-            showSkipButton: true,
-            next: const Icon(Icons.arrow_forward_ios),
-            color: AppColors.dark,
-            isProgressTap: false,
-            dotsDecorator: DotsDecorator(
-              color: AppColors.grey,
-              activeColor: AppColors.green,
-              activeSize: const Size(22, 10),
-              activeShape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(24),
-              ),
-            ),
-          ),
-        )),
-      ),
-    );
+  State<OnboardingView> createState() => _OnboardingViewState();
+}
+
+class _OnboardingViewState extends State<OnboardingView> {
+  int currentIndex = 0;
+  late PageController _pageController;
+  @override
+  void initState() {
+    _pageController = PageController(initialPage: 0);
+    super.initState();
   }
 
-  PageDecoration onboardingPageDecoration({Color? color}) {
-    return PageDecoration(
-      titleTextStyle: GoogleFonts.poppins(
-          fontSize: 25, fontWeight: FontWeight.bold, color: AppColors.dark),
-      bodyTextStyle: GoogleFonts.poppins(
-          fontSize: 14, fontWeight: FontWeight.normal, color: AppColors.dark),
-      titlePadding: const EdgeInsets.only(top: 16, bottom: 10),
-    );
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
   }
+
+  List<OnboardModel> screens = <OnboardModel>[
+    OnboardModel(
+      img: AppImages.onboardingImage1,
+      text: AppStrings.onBoardingText1,
+      desc: AppStrings.onBoardingSubText1,
+    ),
+    OnboardModel(
+      img: AppImages.onboardingImage2,
+      text: AppStrings.onBoardingText2,
+      desc: AppStrings.onBoardingText2,
+    ),
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return ViewModelBuilder<OnboardingViewModel>.reactive(
+        viewModelBuilder: () => OnboardingViewModel(),
+        builder: (BuildContext context, OnboardingViewModel model,
+                Widget? child) =>
+            Statusbar(
+              child: SafeArea(
+                child: Scaffold(
+                  extendBodyBehindAppBar: true,
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  appBar: AppBar(
+                    backgroundColor: Colors.transparent,
+                    elevation: 0.0,
+                    actions: [
+                      TextButton(
+                        onPressed: model.navigateToGetStarted,
+                        child: Text("Skip",
+                            style: Theme.of(context).textTheme.headline2),
+                      )
+                    ],
+                  ),
+                  body: PageView.builder(
+                      itemCount: screens.length,
+                      controller: _pageController,
+                      onPageChanged: (int index) {
+                        setState(() {
+                          currentIndex = index;
+                        });
+                      },
+                      itemBuilder: (_, index) {
+                        return Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Image.asset(
+                              screens[index].img,
+                            ),
+                            const Spacing.mediumHeight(),
+                            Text(
+                              screens[index].text,
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.headline1,
+                            ),
+                            const Spacing.smallHeight(),
+                            Text(
+                              screens[index].desc,
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.headline4,
+                            ),
+                            const Spacing.bigHeight(),
+                            const Spacing.bigHeight(),
+                            const Spacing.bigHeight(),
+                            InkWell(
+                              onTap: () async {
+                                print(index);
+                                if (index == screens.length - 1) {
+                                  model.navigateToGetStarted();
+                                }
+
+                                _pageController.nextPage(
+                                  duration: const Duration(milliseconds: 300),
+                                  curve: Curves.ease,
+                                );
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 30.0, vertical: 10),
+                                decoration: BoxDecoration(
+                                    color: AppColors.green,
+                                    borderRadius: BorderRadius.circular(15.0)),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: const [
+                                    Icon(
+                                      Icons.arrow_forward,
+                                      color: AppColors.light,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        );
+                      }),
+                ),
+              ),
+            ));
+  }
+}
+
+class OnboardModel {
+  String img;
+  String text;
+  String desc;
+
+  OnboardModel({
+    required this.img,
+    required this.text,
+    required this.desc,
+  });
 }

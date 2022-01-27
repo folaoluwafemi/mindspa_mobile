@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mindspa_mobile/src/UI/bottom_navigation/view/bottom_navigation_view.dart';
 import 'package:mindspa_mobile/src/UI/onboarding/onboarding_view.dart';
@@ -23,14 +22,3 @@ class StartupView extends StatelessWidget {
     );
   }
 }
-
-// return StreamBuilder<User?>(
-//           stream: FirebaseAuth.instance.authStateChanges(),
-//           builder: (context, snapshot) {
-//             if (!snapshot.hasData) {
-//               return const OnboardingView();
-//             } else {
-//               return const BottomNavigationView();
-//             }
-//           },
-//         );

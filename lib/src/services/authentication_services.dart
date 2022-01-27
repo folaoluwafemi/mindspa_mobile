@@ -42,10 +42,10 @@ class AuthenticationServices {
         password: password,
       );
 
-      if (!_userCredential.user!.emailVerified) {
-        await _firebaseAuth.signOut();
-        throw Failure('Email is not verified, Pls Check Your Email');
-      }
+      // if (!_userCredential.user!.emailVerified) {
+      //   await _firebaseAuth.signOut();
+      //   throw Failure('Email is not verified, Pls Check Your Email');
+      // }
     } on FirebaseAuthException catch (ex) {
       throw Failure(ex.message ?? 'Something went wrong!');
     }

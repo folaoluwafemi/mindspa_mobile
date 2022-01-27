@@ -8,10 +8,11 @@ class AppColors {
   static const Color green = Color(0XFF53796A);
   static const Color lightGreen = Color(0XFF92AF96);
   static const lightGreenVariant = Color(0XFF425F53);
+  static const warmBlue = Color(0XFFACC2B9);
   static const light = Color(0xFFFFFFFF);
   static const grey = Color(0xFF999999);
   static const Color linksColor = Color(0XFF407afd);
   static const defaultShadow = BoxShadow(
-    color: green,
+    color: lightGreenVariant,
   );
 }

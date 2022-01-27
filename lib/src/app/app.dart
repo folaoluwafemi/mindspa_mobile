@@ -1,5 +1,7 @@
 import 'package:mindspa_mobile/src/UI/authentication/views/forgot_password_view.dart';
 import 'package:mindspa_mobile/src/UI/authentication/views/verify_email_view.dart';
+import 'package:mindspa_mobile/src/UI/get%20started/get_started_view.dart';
+import 'package:mindspa_mobile/src/UI/settings/settings_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -22,7 +24,9 @@ import '/src/services/snackbar_service.dart';
   MaterialRoute(page: NutritionView),
   MaterialRoute(page: ExerciseView),
   MaterialRoute(page: ForgotPasswordView),
-  MaterialRoute(page: VerifyEmailView)
+  MaterialRoute(page: VerifyEmailView),
+  MaterialRoute(page: SettingsView),
+  MaterialRoute(page: GetStartedView),
 ], dependencies: [
   LazySingleton(classType: NavigationService),
   LazySingleton(classType: SnackbarServices),

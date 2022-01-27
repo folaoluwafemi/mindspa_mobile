@@ -6,8 +6,10 @@
 
 // ignore_for_file: public_member_api_docs
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked/stacked_annotations.dart';
 
 import '../UI/authentication/views/forgot_password_view.dart';
 import '../UI/authentication/views/login_view.dart';
@@ -15,8 +17,10 @@ import '../UI/authentication/views/register_view.dart';
 import '../UI/authentication/views/verify_email_view.dart';
 import '../UI/bottom_navigation/view/bottom_navigation_view.dart';
 import '../UI/exercise/exercise_view.dart';
+import '../UI/get%20started/get_started_view.dart';
 import '../UI/nutrition/nutrition_view.dart';
 import '../UI/onboarding/onboarding_view.dart';
+import '../UI/settings/settings_view.dart';
 import '../UI/sleepandrelaxation/sleep_and_relaxation_view.dart';
 
 class Routes {
@@ -29,6 +33,8 @@ class Routes {
   static const String exerciseView = '/exercise-view';
   static const String forgotPasswordView = '/forgot-password-view';
   static const String verifyEmailView = '/verify-email-view';
+  static const String settingsView = '/settings-view';
+  static const String getStartedView = '/get-started-view';
   static const all = <String>{
     onboardingView,
     loginView,
@@ -39,6 +45,8 @@ class Routes {
     exerciseView,
     forgotPasswordView,
     verifyEmailView,
+    settingsView,
+    getStartedView,
   };
 }
 
@@ -55,6 +63,8 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.exerciseView, page: ExerciseView),
     RouteDef(Routes.forgotPasswordView, page: ForgotPasswordView),
     RouteDef(Routes.verifyEmailView, page: VerifyEmailView),
+    RouteDef(Routes.settingsView, page: SettingsView),
+    RouteDef(Routes.getStartedView, page: GetStartedView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -66,11 +76,8 @@ class StackedRouter extends RouterBase {
       );
     },
     LoginView: (data) {
-      var args = data.getArgs<LoginViewArguments>(
-        orElse: () => LoginViewArguments(),
-      );
       return MaterialPageRoute<dynamic>(
-        builder: (context) => LoginView(key: args.key),
+        builder: (context) => const LoginView(),
         settings: data,
       );
     },
@@ -119,18 +126,24 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
+    SettingsView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const SettingsView(),
+        settings: data,
+      );
+    },
+    GetStartedView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const GetStartedView(),
+        settings: data,
+      );
+    },
   };
 }
 
 /// ************************************************************************
 /// Arguments holder classes
 /// *************************************************************************
-
-/// LoginView arguments holder class
-class LoginViewArguments {
-  final Key? key;
-  LoginViewArguments({this.key});
-}
 
 /// RegisterView arguments holder class
 class RegisterViewArguments {

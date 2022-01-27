@@ -14,12 +14,13 @@ class RegisterViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _snackbarService = locator<SnackbarServices>();
   final _authenticationService = locator<AuthenticationServices>();
-  bool _passwordVisible = true;
 
-  bool get passwordVisible => _passwordVisible;
+  bool _obsurePassword = true;
 
-  void togglePasswordVisibility() {
-    _passwordVisible = !_passwordVisible;
+  bool get obscurePassword => _obsurePassword;
+
+  void toggleRevealPasswordButton() {
+    _obsurePassword = !_obsurePassword;
     notifyListeners();
   }
 
@@ -51,5 +52,5 @@ class RegisterViewModel extends BaseViewModel {
 
   /// Register was pushed on to the navigation stack, so here we are just
   /// ...popping it off the stack to return to login
-  void navigateToLogin() => _navigationService.back();
+  void navigateToLogin() => _navigationService.navigateTo(Routes.loginView);
 }

@@ -1,4 +1,3 @@
-
 class AppStrings {
   /// This class holds all the App Strings
   /// Its also has a private constructor so that the class cannot be instantiated outside the class.
@@ -10,17 +9,18 @@ class AppStrings {
 
   /// Onboarding Screen
   static const onBoardingText1 = 'Resources just for you';
-  static const onBoardingSubText1 = 'Speak with a professional';
-  static const onBoardingText2 = 'Speak with a professional';
-  static const onBoardingSubText2 =
-      'Get connected and paired with experts of your choosing.';
-  static const onBoardingText3 = 'Get an initial diagnosis';
+  static const onBoardingSubText1 =
+      'Get access to podcasts , articles, videos to learn more about your mental health. ';
+  static const onBoardingText3 = 'Join a community';
   static const onBoardingSubText3 =
+      'Join others and share experiences in a safe space on your jounerney to recovey';
+  static const onBoardingText2 = 'Get an initial diagnosis';
+  static const onBoardingSubText2 =
       'Take a self-assessment quiz and get personalised results.';
   static const onBoardingText4 = 'Welcome to Mind-Spa';
   static const onBoardingSubText4 =
       'Learn how to manage your mental health better';
-  static const haveAccount = 'Already have an account? LOG IN';
+  static const haveAccount = 'Already have an account?';
   static const getStarted = 'Get Started';
   static const skip = 'Skip';
 
@@ -53,7 +53,8 @@ class AppStrings {
   static const welcome = "Welcome";
   static const canWeHelp = "What can we help with today?";
   static const categories = "Categories";
-  static const sleepRelaxation = "Sleep &\nRelaxation";
+  static const sleepandRelaxation = "Sleep &\nRelaxation";
+  static const relaxation = "Relaxation";
   static const nutritionGuide = "Nutrition guide";
   static const exercise = "Exercise";
   static const explore = "Explore";
@@ -63,7 +64,7 @@ class AppStrings {
   static const forYou = "For you";
   static const forYouText1 =
       "Taking this first step may feel daunting and overwhelming but we’ll take your hand every step of the way";
-  static const audio = "Audios\n&\nPodcasts";
+  static const audio = "Audios & Podcasts";
   static const articles = "Articles";
   static const takeQuiz = "Take a quiz";
   static const takeCourse = "Take a course";
@@ -137,4 +138,12 @@ class AppStrings {
       "You don’t have to go on this journey alone.";
   static const communityText2 = "Join as a therapist";
   static const alreadyMember = "Already a member? Log in";
+
+  /// Settings Strings
+  static const accountInfo = 'Account Info';
+  static const changePassWord = 'Change Password';
+  static const downloads = 'Downloads';
+  static const myFavourites = 'My Favourites';
+  static const helpSupport = 'Help \$ Support';
+  static const about = 'About';
 }

@@ -1,170 +1,155 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mindspa_mobile/src/UI/home/home_viewmodel.dart';
-import 'package:mindspa_mobile/src/core/constant/app_colors.dart';
 import 'package:mindspa_mobile/src/core/constant/app_images.dart';
 import 'package:mindspa_mobile/src/core/constant/app_strings.dart';
 import 'package:mindspa_mobile/src/core/constant/dimensions.dart';
-import 'package:mindspa_mobile/src/widgets/smart_reusable_card.dart';
+import 'package:mindspa_mobile/src/widgets/scaffold_decorator.dart';
+
 import 'package:mindspa_mobile/src/widgets/spacing.dart';
 import 'package:mindspa_mobile/src/widgets/statusbar.dart';
 
 import 'package:stacked/stacked.dart';
 
-class HomeView extends HookWidget {
-  const HomeView({Key? key}) : super(key: key);
 
+class HomeView extends StatefulWidget {
+  const HomeView({Key? key}) : super(key: key);
+  @override
+  _HomeViewState createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  var searchFieldController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final ScrollController scrollController = ScrollController();
-    final searchFieldController = useTextEditingController();
-    return ViewModelBuilder<HomeViewModel>.reactive(
+    return ViewModelBuilder<HomeViewModel>.nonReactive(
       viewModelBuilder: () => HomeViewModel(),
       builder: (
         BuildContext context,
         HomeViewModel model,
         Widget? child,
       ) {
-        // final width = MediaQuery.of(context).size.width;
         return Statusbar(
           child: Scaffold(
-            body: CustomScrollView(
-              controller: scrollController,
-              shrinkWrap: true,
-              slivers: [
-                SliverAppBar(
-                  floating: true,
-                  pinned: true,
-                  snap: false,
-                  toolbarHeight: 100,
-                  centerTitle: false,
-                  title: ListTile(
-                    isThreeLine: true,
-                    title: Text(
-                      '${AppStrings.welcome} ${model.currentUserdisplayname}',
-                      style: Theme.of(context).textTheme.headline2,
-                    ),
-                    subtitle: Text(
-                      AppStrings.canWeHelp,
-                      style: Theme.of(context).textTheme.headline2!.copyWith(
-                            fontSize: 12,
-                          ),
-                    ),
-                  ),
-                  bottom: AppBar(
-                    title: Container(
-                      decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(20),
-                            bottomRight: Radius.circular(10),
-                          )),
-                      width: double.infinity,
-                      height: 40,
-                      child: Center(
-                        child: SearchTextField(
-                          controller: searchFieldController,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 5, horizontal: 13),
+            backgroundColor: Theme.of(context).colorScheme.primaryVariant,
+            body: ScaffoldBackgroundDecorator(
+              child: SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 30.0, vertical: 15),
+                  child: SingleChildScrollView(
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
-                        // SearchTextField(controller: searchFieldController),
+                        FittedBox(
+                          child: Text(
+                            '${AppStrings.welcome} ${model.currentUserdisplayname}',
+                            style: Theme.of(context).textTheme.headline1,
+                          ),
+                        ),
+                        const Spacing.smallHeight(),
                         Text(
-                          AppStrings.categories,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline4!
-                              .copyWith(fontSize: 25),
-                        ),
-                        const Spacing.smallHeight(),
-                        SmartResuableCard(
-                          text: AppStrings.sleepRelaxation,
-                          imagePath: AppImages.homeAvatar1,
-                          color: Theme.of(context).colorScheme.primary,
-                          onTap: () => model.navigateToSleepRelaxation(),
-                        ),
-                        const Spacing.smallHeight(),
-                        SmartResuableCard(
-                          text: AppStrings.nutritionGuide,
-                          imagePath: AppImages.homeAvatar2,
-                          color: Theme.of(context).colorScheme.secondary,
-                          onTap: () => model.navigateToNutrition(),
-                        ),
-                        const Spacing.smallHeight(),
-                        SmartResuableCard(
-                          text: AppStrings.exercise,
-                          imagePath: AppImages.homeAvatar,
-                          color: Theme.of(context).colorScheme.primary,
-                          onTap: () => model.navigateToExercise(),
+                          AppStrings.canWeHelp,
+                          style: Theme.of(context).textTheme.headline4,
                         ),
                         const Spacing.mediumHeight(),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 5),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                AppStrings.explore,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline4!
-                                    .copyWith(fontSize: 19),
-                              ),
-                              Directionality(
-                                textDirection: TextDirection.rtl,
-                                child: TextButton.icon(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.arrow_back,
-                                    color:
-                                        Theme.of(context).colorScheme.onSurface,
-                                  ),
-                                  label: Text(
-                                    AppStrings.seeAll,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyText2!
-                                        .copyWith(fontSize: 15),
-                                  ),
+                        SearchTextField(controller: searchFieldController),
+                        const Spacing.bigHeight(),
+                        Text(
+                          'Recommended',
+                          style: Theme.of(context).textTheme.headline2,
+                        ),
+                        const Spacing.smallHeight(),
+                        Container(
+                          height: 150,
+                          width: double.infinity,
+                          decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                            image: DecorationImage(
+                                image: AssetImage(
+                                  AppImages.recommended,
                                 ),
-                              )
-                            ],
+                                fit: BoxFit.cover,
+                                filterQuality: FilterQuality.high),
                           ),
                         ),
-                        SizedBox(
-                          height: 200,
-                          child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            children: [
-                              for (var i = 0; i < 8; i++)
-                                Container(
-                                  margin:
-                                      const EdgeInsets.symmetric(horizontal: 5),
-                                  decoration: BoxDecoration(
-                                      color:
-                                          Theme.of(context).colorScheme.primary,
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(10))),
-                                  child:
-                                      SvgPicture.asset(AppImages.homeAvatar1),
-                                )
-                            ],
+                        const Spacing.bigHeight(),
+                        Text(
+                          AppStrings.categories,
+                          style: Theme.of(context).textTheme.headline2,
+                        ),
+                        const Spacing.smallHeight(),
+                        Flexible(
+                          child: SizedBox(
+                            child: GridView.builder(
+                              shrinkWrap: true,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      mainAxisSpacing: 10,
+                                      crossAxisSpacing: 10),
+                              itemCount: model.categoryImage.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Stack(
+                                  clipBehavior: Clip.none,
+                                  alignment: Alignment.bottomCenter,
+                                  fit: StackFit.expand,
+                                  children: [
+                                    Container(
+                                      height: 150,
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: AssetImage(
+                                                  model.categoryImage[index]))),
+                                    ),
+                                    Positioned(
+                                      left: 0,
+                                      right: 0,
+                                      child: Center(
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSurface,
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(20),
+                                              topRight: Radius.circular(20),
+                                            ),
+                                          ),
+                                          width: 130,
+                                          height: 50,
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 10),
+                                            child: Center(
+                                              child: FittedBox(
+                                                child: Text(
+                                                  model.categoryText[index],
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .headline3,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                );
+                              },
+                            ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
                 ),
-              ],
+              ),
             ),
           ),
         );
@@ -181,9 +166,9 @@ class SearchTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        boxShadow: [AppColors.defaultShadow],
-      ),
+      // decoration: const BoxDecoration(
+      //   boxShadow: [AppColors.defaultShadow],
+      // ),
       child: TextField(
         controller: controller,
         textInputAction: TextInputAction.search,

@@ -5,8 +5,9 @@ import 'package:mindspa_mobile/src/UI/bottom_navigation/view/bottom_navigation_v
 import 'package:mindspa_mobile/src/UI/for_you/for_you_view.dart';
 
 import 'package:mindspa_mobile/src/UI/home/home_view.dart';
-import 'package:mindspa_mobile/src/UI/mind_bot/view/mind_bot.dart';
+import 'package:mindspa_mobile/src/UI/mind_bot/mind_bot_view.dart';
 import 'package:mindspa_mobile/src/UI/profile/profile_view.dart';
+import 'package:mindspa_mobile/src/core/constant/app_colors.dart';
 import 'package:mindspa_mobile/src/core/constant/app_images.dart';
 import 'package:mindspa_mobile/src/core/constant/app_strings.dart';
 import 'package:mindspa_mobile/src/widgets/statusbar.dart';
@@ -27,11 +28,15 @@ class BottomNavigationView extends StatelessWidget {
       ) {
         return Statusbar(
           child: Scaffold(
+            extendBody: true,
             bottomNavigationBar: BottomNavigationBar(
+              elevation: 0,
+              backgroundColor: Theme.of(context).colorScheme.secondary,
               currentIndex: model.currentIndex,
               onTap: model.setIndex,
-              selectedItemColor: Theme.of(context).colorScheme.secondary,
-              unselectedItemColor: Theme.of(context).colorScheme.primary,
+              selectedItemColor: Theme.of(context).colorScheme.primaryVariant,
+              unselectedItemColor:
+                  Theme.of(context).colorScheme.secondaryVariant,
               showUnselectedLabels: true,
               type: BottomNavigationBarType.fixed,
               items: [
@@ -39,8 +44,8 @@ class BottomNavigationView extends StatelessWidget {
                   icon: SvgPicture.asset(
                     AppImages.homeButton,
                     color: model.currentIndex == 0
-                        ? Theme.of(context).colorScheme.secondary
-                        : Theme.of(context).colorScheme.primary,
+                        ? Theme.of(context).colorScheme.primaryVariant
+                        : Theme.of(context).colorScheme.secondaryVariant,
                   ),
                   label: AppStrings.home,
                 ),
@@ -48,8 +53,8 @@ class BottomNavigationView extends StatelessWidget {
                   icon: SvgPicture.asset(
                     AppImages.forYouButton,
                     color: model.currentIndex == 1
-                        ? Theme.of(context).colorScheme.secondary
-                        : Theme.of(context).colorScheme.primary,
+                        ? Theme.of(context).colorScheme.primaryVariant
+                        : Theme.of(context).colorScheme.secondaryVariant,
                   ),
                   label: AppStrings.forYou,
                 ),
@@ -57,8 +62,8 @@ class BottomNavigationView extends StatelessWidget {
                   icon: SvgPicture.asset(
                     AppImages.mindBotButton,
                     color: model.currentIndex == 2
-                        ? Theme.of(context).colorScheme.secondary
-                        : Theme.of(context).colorScheme.primary,
+                        ? Theme.of(context).colorScheme.primaryVariant
+                        : Theme.of(context).colorScheme.secondaryVariant,
                   ),
                   label: AppStrings.mindbot,
                 ),
@@ -66,30 +71,19 @@ class BottomNavigationView extends StatelessWidget {
                   icon: SvgPicture.asset(
                     AppImages.profileButton,
                     color: model.currentIndex == 3
-                        ? Theme.of(context).colorScheme.secondary
-                        : Theme.of(context).colorScheme.primary,
+                        ? Theme.of(context).colorScheme.primaryVariant
+                        : Theme.of(context).colorScheme.secondaryVariant,
                   ),
                   label: AppStrings.profile,
                 ),
               ],
             ),
-            body: PageTransitionSwitcher(
-              reverse: true,
-              child: [
-                const HomeView(),
-                const ForYouView(),
-                const MindBotView(),
-                const ProfileView(),
-              ][model.currentIndex],
-              transitionBuilder: (child, primaryAnimation, secondaryAnimation) {
-                return SharedAxisTransition(
-                    child: child,
-                    animation: primaryAnimation,
-                    secondaryAnimation: secondaryAnimation,
-                    transitionType: SharedAxisTransitionType.horizontal);
-              },
-              duration: const Duration(milliseconds: 300),
-            ),
+            body: [
+              const HomeView(),
+              const ForYouView(),
+              const MindBotView(),
+              const ProfileView(),
+            ][model.currentIndex],
           ),
         );
       },

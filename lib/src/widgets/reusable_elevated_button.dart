@@ -15,18 +15,12 @@ class ReuseableElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-          primary: Theme.of(context).colorScheme.secondary,
+          primary: Theme.of(context).colorScheme.onSecondary,
           shape: const StadiumBorder()),
       onPressed: onPressed,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 10),
-        child: Text(
-          childText,
-          style: GoogleFonts.poppins(
-            fontWeight: FontWeight.w500,
-            fontSize: 25,
-          ),
-        ),
+        child: Text(childText, style: Theme.of(context).textTheme.headline2),
       ),
     );
   }

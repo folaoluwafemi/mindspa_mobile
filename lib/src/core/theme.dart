@@ -18,8 +18,11 @@ class AppTheme {
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-              minimumSize: const Size.fromHeight(48),
-              shape: const StadiumBorder()),
+            // minimumSize: const Size.fromHeight(48),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
         ),
       );
 
@@ -32,20 +35,18 @@ class AppTheme {
     onSurface: AppColors.lightGreenVariant,
     surface: AppColors.linksColor,
     primaryVariant: AppColors.light,
-
+    onSecondary: AppColors.warmBlue,
   );
 
   static TextTheme _textTheme(ColorScheme colorScheme) => TextTheme(
-       headline1: GoogleFonts.poppins(
-         fontSize: 24,
-         fontWeight: FontWeight.w400,
-         color: colorScheme.primaryVariant
-       ),
+        headline1: GoogleFonts.poppins(
+            fontSize: 24,
+            fontWeight: FontWeight.w500,
+            color: colorScheme.primaryVariant),
         headline2: GoogleFonts.poppins(
-          fontSize: 18,
-          fontWeight: FontWeight.w400,
-          color: colorScheme.primaryVariant
-        ),
+            fontSize: 18,
+            fontWeight: FontWeight.w400,
+            color: colorScheme.primaryVariant),
         headline3: GoogleFonts.poppins(
           fontSize: 16,
           fontWeight: FontWeight.w400,
@@ -54,11 +55,12 @@ class AppTheme {
         headline4: GoogleFonts.poppins(
           fontSize: 14,
           fontWeight: FontWeight.w400,
+          color: colorScheme.primaryVariant,
         ),
-          headline5: GoogleFonts.poppins(
-          fontSize: 12
+        headline5: GoogleFonts.poppins(
+          fontSize: 12,
+          color: colorScheme.primaryVariant,
         ),
-
         bodyText1: GoogleFonts.poppins(
           fontSize: 14,
           fontWeight: FontWeight.w400,
@@ -66,7 +68,7 @@ class AppTheme {
         ),
         bodyText2: GoogleFonts.poppins(
           fontWeight: FontWeight.w400,
-          color: colorScheme.onSurface,
+          color: colorScheme.secondaryVariant,
         ),
         button: GoogleFonts.poppins(
           fontSize: 14,
