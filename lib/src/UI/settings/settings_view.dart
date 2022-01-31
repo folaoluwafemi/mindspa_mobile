@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mindspa_mobile/src/UI/settings/settings_viewmodel.dart';
-import 'package:mindspa_mobile/src/core/constant/app_colors.dart';
 import 'package:mindspa_mobile/src/core/constant/app_images.dart';
 import 'package:mindspa_mobile/src/core/constant/app_strings.dart';
+import 'package:mindspa_mobile/src/widgets/reusable_circular_progress_indicator.dart';
 import 'package:mindspa_mobile/src/widgets/scaffold_decorator.dart';
 import 'package:mindspa_mobile/src/widgets/statusbar.dart';
 import 'package:stacked/stacked.dart';
@@ -45,45 +45,47 @@ class SettingsView extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 30.0, vertical: 15),
-                  child: Column(
-                    children: [
-                      const ReusableListTile(
-                        imagePath: AppImages.accountsSvg,
-                        title: AppStrings.accountInfo,
-                      ),
-                      const ReusableListTile(
-                        imagePath: AppImages.passwordSvg,
-                        title: AppStrings.changePassWord,
-                      ),
-                      const ReusableListTile(
-                        title: AppStrings.downloads,
-                        imagePath: AppImages.downloadsSvg,
-                      ),
-                      const ReusableListTile(
-                        title: AppStrings.myFavourites,
-                        imagePath: AppImages.favouritesSvg,
-                      ),
-                      const ReusableListTile(
-                        title: AppStrings.reminder,
-                        imagePath: AppImages.reminderSvg,
-                      ),
-                      const ReusableListTile(
-                        imagePath: AppImages.helpsupportSvg,
-                        title: AppStrings.helpSupport,
-                      ),
-                      const ReusableListTile(
-                        imagePath: AppImages.aboutSvg,
-                        title: AppStrings.about,
-                      ),
-                      GestureDetector(
-                        onTap: model.signOut,
-                        child: const ReusableListTile(
-                          imagePath: AppImages.signOutSvg,
-                          title: AppStrings.signOut,
+                  child: model.isBusy
+                      ? const ReuseableCircularProgressIndicator()
+                      : Column(
+                          children: [
+                            const ReusableListTile(
+                              imagePath: AppImages.accountsSvg,
+                              title: AppStrings.accountInfo,
+                            ),
+                            const ReusableListTile(
+                              imagePath: AppImages.passwordSvg,
+                              title: AppStrings.changePassWord,
+                            ),
+                            const ReusableListTile(
+                              title: AppStrings.downloads,
+                              imagePath: AppImages.downloadsSvg,
+                            ),
+                            const ReusableListTile(
+                              title: AppStrings.myFavourites,
+                              imagePath: AppImages.favouritesSvg,
+                            ),
+                            const ReusableListTile(
+                              title: AppStrings.reminder,
+                              imagePath: AppImages.reminderSvg,
+                            ),
+                            const ReusableListTile(
+                              imagePath: AppImages.helpsupportSvg,
+                              title: AppStrings.helpSupport,
+                            ),
+                            const ReusableListTile(
+                              imagePath: AppImages.aboutSvg,
+                              title: AppStrings.about,
+                            ),
+                            GestureDetector(
+                              onTap: model.signOut,
+                              child: const ReusableListTile(
+                                imagePath: AppImages.signOutSvg,
+                                title: AppStrings.signOut,
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
-                  ),
                 ),
               ),
             ),

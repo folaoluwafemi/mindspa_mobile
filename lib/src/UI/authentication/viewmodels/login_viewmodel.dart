@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:mindspa_mobile/src/app/app.locator.dart';
 import 'package:mindspa_mobile/src/app/app.router.dart';
 import 'package:stacked/stacked.dart';
@@ -15,6 +14,10 @@ class LoginViewModel extends BaseViewModel {
 
   bool _obsurePassword = true;
 
+  navigateTOForgotPasswordScreen() {
+    _navigationService.navigateTo(Routes.forgotPasswordView);
+  }
+
   bool get obscurePassword => _obsurePassword;
 
   void toggleRevealPasswordButton() {
@@ -26,16 +29,23 @@ class LoginViewModel extends BaseViewModel {
     required String emailAddress,
     required String password,
   }) async {
+    setBusy(true);
     try {
       await _authenticationService.login(
         emailAddress: emailAddress.trim(),
         password: password,
       );
-
-      _navigationService.replaceWith(Routes.bottomNavigationView);
+      if (_authenticationService.loggedInUser?.emailVerified == false) {
+        _navigationService.replaceWith(
+          Routes.verifyEmailView,
+        );
+      } else {
+        _navigationService.replaceWith(Routes.bottomNavigationView);
+      }
     } on Failure catch (ex) {
       _snackbarService.showErrorSnackBar(ex.message);
     }
+    setBusy(false);
   }
 
   Future<void> loginUserWithGoogle() async {
@@ -52,7 +62,7 @@ class LoginViewModel extends BaseViewModel {
     }
   }
 
-  void navigateToRegister(BuildContext context) {
-    Navigator.pushNamed(context, Routes.registerView);
+  void navigateToRegister() {
+    _navigationService.replaceWith(Routes.registerView);
   }
 }

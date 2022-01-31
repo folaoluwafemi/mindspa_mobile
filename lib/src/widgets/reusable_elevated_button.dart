@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:google_fonts/google_fonts.dart';
-
 class ReuseableElevatedButton extends StatelessWidget {
   final String childText;
-  final Function() onPressed;
+  final VoidCallback onPressed;
   const ReuseableElevatedButton({
     Key? key,
     required this.childText,

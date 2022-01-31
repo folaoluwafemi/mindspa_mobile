@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mindspa_mobile/src/UI/home/home_viewmodel.dart';
 import 'package:mindspa_mobile/src/core/constant/app_images.dart';
 import 'package:mindspa_mobile/src/core/constant/app_strings.dart';
-import 'package:mindspa_mobile/src/core/constant/dimensions.dart';
+import 'package:mindspa_mobile/src/core/constant/app_ui_helpers.dart';
 import 'package:mindspa_mobile/src/widgets/scaffold_decorator.dart';
 
 import 'package:mindspa_mobile/src/widgets/spacing.dart';
@@ -165,29 +165,24 @@ class SearchTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // decoration: const BoxDecoration(
-      //   boxShadow: [AppColors.defaultShadow],
-      // ),
-      child: TextField(
-        controller: controller,
-        textInputAction: TextInputAction.search,
-        decoration: InputDecoration(
-          contentPadding: const EdgeInsets.only(
-            bottom: 16,
-            right: Dimensions.medium,
-          ),
-          fillColor: Colors.white,
-          filled: true,
-          hintText: 'Search',
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(32),
-            borderSide: BorderSide.none,
-          ),
-          prefixIcon: const Icon(Icons.search_sharp),
-          prefixIconConstraints: const BoxConstraints(
-            minWidth: 64,
-          ),
+    return TextField(
+      controller: controller,
+      textInputAction: TextInputAction.search,
+      decoration: InputDecoration(
+        contentPadding: const EdgeInsets.only(
+          bottom: 16,
+          right: UiHelper.medium,
+        ),
+        fillColor: Colors.white,
+        filled: true,
+        hintText: 'Search',
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(32),
+          borderSide: BorderSide.none,
+        ),
+        prefixIcon: const Icon(Icons.search_sharp),
+        prefixIconConstraints: const BoxConstraints(
+          minWidth: 64,
         ),
       ),
     );

@@ -1,12 +1,10 @@
-import 'package:mindspa_mobile/src/UI/onboarding/onboarding_view.dart';
-
 class AppImages {
   /// This class holds all the App Image link paths
   /// Its also has a private constructor so that the class cannot be instantiated outside the class.
   /// You can only access the static fields.
   AppImages._();
 
-  //Onboarding Avatars
+  ///Onboarding Avatars
   static const onBoardingAvatar1 = 'assets/svg/onboard_1.svg';
   static const onBoardingAvatar2 = 'assets/svg/onboard_2.svg';
   static const onBoardingAvatar3 = 'assets/svg/onboard_3.svg';
@@ -17,7 +15,7 @@ class AppImages {
   static const onboardingImage2 = 'assets/png/onboarding2.png';
   static const onboardingImage3 = 'assets/png/onboarding3.png';
 
-  // Authentication Avatar
+  /// Authentication Avatar
   static const signinSignuplogo = 'assets/svg/signin_signup_avatar.svg';
 
   //Authentication logos
@@ -103,4 +101,7 @@ class AppImages {
   static const helpsupportSvg = 'assets/svg/Vector (6).svg';
   static const aboutSvg = 'assets/svg/Vector (7).svg';
   static const signOutSvg = 'assets/svg/Vector (8).svg';
+
+  /// Forgot Password Svgs
+  static const forgotPasswordSvg = 'assets/svg/forgotpassword.svg';
 }

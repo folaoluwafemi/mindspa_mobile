@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:mindspa_mobile/src/UI/authentication/model/user_params.dart';
 import 'package:mindspa_mobile/src/app/app.locator.dart';
 import 'package:mindspa_mobile/src/app/app.router.dart';
@@ -25,15 +27,21 @@ class RegisterViewModel extends BaseViewModel {
   }
 
   Future<void> registerUser({required UserParams userParams}) async {
+    setBusy(true);
     try {
       await _authenticationService.register(params: userParams);
 
-      _navigationService.replaceWith(
-        Routes.verifyEmailView,
-      );
+      if (_authenticationService.loggedInUser?.emailVerified == false) {
+        _navigationService.replaceWith(
+          Routes.verifyEmailView,
+        );
+      } else {
+        _navigationService.replaceWith(Routes.bottomNavigationView);
+      }
     } on Failure catch (ex) {
       _snackbarService.showErrorSnackBar(ex.message);
     }
+    setBusy(false);
   }
 
   Future<void> loginUserWithGoogle() async {

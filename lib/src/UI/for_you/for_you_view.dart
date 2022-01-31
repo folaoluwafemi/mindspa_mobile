@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:mindspa_mobile/src/UI/for_you/for_you_viewmodel.dart';

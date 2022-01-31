@@ -47,6 +47,8 @@ class AppStrings {
   static const fullName = 'Fullname';
   static const signOut = 'Sign Out';
   static const displayName = 'Display name';
+  static const forgotPasswordMainText =
+      'Please enter your registered email address.\nA link will be sent to the email to reset your password';
 
   ///Home
   static const home = 'Home';

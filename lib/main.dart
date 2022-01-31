@@ -9,8 +9,6 @@ import 'package:mindspa_mobile/src/services/snackbar_service.dart';
 
 import 'package:stacked_services/stacked_services.dart';
 
-import '../src/UI/startup/startup_view.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 

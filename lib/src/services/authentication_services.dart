@@ -42,10 +42,10 @@ class AuthenticationServices {
         password: password,
       );
 
-      // if (!_userCredential.user!.emailVerified) {
-      //   await _firebaseAuth.signOut();
-      //   throw Failure('Email is not verified, Pls Check Your Email');
-      // }
+      if (!_userCredential.user!.emailVerified) {
+        await _firebaseAuth.signOut();
+        throw Failure('Email is not verified, Pls Check Your Email');
+      }
     } on FirebaseAuthException catch (ex) {
       throw Failure(ex.message ?? 'Something went wrong!');
     }
@@ -70,6 +70,33 @@ class AuthenticationServices {
       } on FirebaseAuthException catch (ex) {
         throw Failure(ex.message ?? 'Something went wrong!');
       }
+    }
+  }
+
+  Future<void> sendVerificationEmail() async {
+    try {
+      final user = _firebaseAuth.currentUser;
+      await user?.sendEmailVerification();
+    } on FirebaseAuthException catch (ex) {
+      throw Failure(ex.message ?? 'Something went wrong!');
+    } on SocketException catch (ex) {
+      throw Failure(
+          'You are not connected to the internet\n Error: ${ex.message}');
+    } catch (ex) {
+      throw Failure(ex.toString());
+    }
+  }
+
+  Future<void> checkVerificationAccount() async {
+    try {
+      await _firebaseAuth.currentUser?.reload();
+    } on SocketException catch (ex) {
+      throw Failure(
+          'You are not connected to the internet\n Error: ${ex.message}');
+    } on FirebaseException catch (ex) {
+      throw Failure('Unable to verify email\n Error: ${ex.message}');
+    } catch (ex) {
+      ex.toString();
     }
   }
 

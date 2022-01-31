@@ -6,4 +6,6 @@ import '../../services/authentication_services.dart';
 class StartupViewModel extends BaseViewModel {
   final _authenticationService = locator<AuthenticationServices>();
   bool get currentUser => _authenticationService.loggedInUser == null;
+  bool? get newcurrentUser =>
+      _authenticationService.loggedInUser?.emailVerified;
 }

@@ -19,60 +19,63 @@ class GetStartedView extends StatelessWidget {
         GetStartedViewModel model,
         Widget? child,
       ) {
-        return SafeArea(
-            child: Statusbar(
-                child: Scaffold(
-          backgroundColor: Theme.of(context).colorScheme.primary,
-          body: Column(
-            children: [
-              Image.asset(AppImages.onboardingImage3),
-              const Spacing.mediumHeight(),
-              Text(
-                AppStrings.onBoardingText3,
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headline1,
-              ),
-              const Spacing.smallHeight(),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Text(
-                  AppStrings.onBoardingSubText3,
+        return WillPopScope(
+          onWillPop: () async => false,
+          child: SafeArea(
+              child: Statusbar(
+                  child: Scaffold(
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            body: Column(
+              children: [
+                Image.asset(AppImages.onboardingImage3),
+                const Spacing.mediumHeight(),
+                Text(
+                  AppStrings.onBoardingText3,
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headline4,
+                  style: Theme.of(context).textTheme.headline1,
                 ),
-              ),
-              const Spacing.smallHeight(),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    primary: Theme.of(context).colorScheme.onSecondary),
-                onPressed: model.navigateToSignUp,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                const Spacing.smallHeight(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Text(
-                    AppStrings.getStarted,
-                    style: Theme.of(context).textTheme.headline3,
+                    AppStrings.onBoardingSubText3,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.headline4,
                   ),
                 ),
-              ),
-              const Spacing.smallHeight(),
-              RichText(
-                text: TextSpan(
-                  text: '${AppStrings.haveAccount} ',
-                  children: [
-                    TextSpan(
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () => model.navigateToLogin(),
-                      text: AppStrings.login,
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.onSecondary,
-                      ),
-                    )
-                  ],
+                const Spacing.smallHeight(),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: Theme.of(context).colorScheme.onSecondary),
+                  onPressed: model.navigateToSignUp,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 40),
+                    child: Text(
+                      AppStrings.getStarted,
+                      style: Theme.of(context).textTheme.headline3,
+                    ),
+                  ),
                 ),
-              )
-            ],
-          ),
-        )));
+                const Spacing.smallHeight(),
+                RichText(
+                  text: TextSpan(
+                    text: '${AppStrings.haveAccount} ',
+                    children: [
+                      TextSpan(
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () => model.navigateToLogin(),
+                        text: AppStrings.login,
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onSecondary,
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ))),
+        );
       },
     );
   }
