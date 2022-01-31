@@ -17,10 +17,13 @@ class ExternalAuthButtons extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-            color: Colors.transparent,
-            borderRadius: BorderRadius.circular(100),
-            border: Border.all(
-                width: 3, color: Theme.of(context).colorScheme.onSurface,),),
+          color: Colors.transparent,
+          borderRadius: BorderRadius.circular(100),
+          border: Border.all(
+            width: 3,
+            color: Theme.of(context).colorScheme.onSecondary,
+          ),
+        ),
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: SvgPicture.asset(

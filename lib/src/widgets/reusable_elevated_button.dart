@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:google_fonts/google_fonts.dart';
-
 class ReuseableElevatedButton extends StatelessWidget {
   final String childText;
-  final Function() onPressed;
+  final VoidCallback onPressed;
   const ReuseableElevatedButton({
     Key? key,
     required this.childText,
@@ -15,18 +13,12 @@ class ReuseableElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-          primary: Theme.of(context).colorScheme.secondary,
+          primary: Theme.of(context).colorScheme.onSecondary,
           shape: const StadiumBorder()),
       onPressed: onPressed,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 10),
-        child: Text(
-          childText,
-          style: GoogleFonts.poppins(
-            fontWeight: FontWeight.w500,
-            fontSize: 25,
-          ),
-        ),
+        child: Text(childText, style: Theme.of(context).textTheme.headline2),
       ),
     );
   }

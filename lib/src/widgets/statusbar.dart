@@ -28,7 +28,7 @@ class Statusbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnnotatedRegion(
       value: SystemUiOverlayStyle.light.copyWith(
-        statusBarColor: Theme.of(context).colorScheme.primary,
+        statusBarColor: Theme.of(context).colorScheme.onSurface,
         statusBarIconBrightness:
             statusbarType.isLight ? Brightness.dark : Brightness.light,
       ),

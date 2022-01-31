@@ -23,16 +23,17 @@ class ReusableTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      style: Theme.of(context).textTheme.bodyText1,
+      style: Theme.of(context).textTheme.headline4,
       // textAlign: TextAlign.center,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      cursorColor: Theme.of(context).colorScheme.secondary,
+      cursorColor: Theme.of(context).colorScheme.primaryVariant,
       keyboardType: TextInputType.emailAddress,
       textInputAction: textInputAction,
       focusNode: focusNode,
       onFieldSubmitted: onSubmitted,
       validator: validator,
       obscureText: obsureText,
+
       decoration: InputDecoration(
         suffixIcon: icon,
         prefix: const SizedBox(
@@ -40,28 +41,28 @@ class ReusableTextField extends StatelessWidget {
         ),
         border: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Theme.of(context).colorScheme.onSurface,
+            color: Theme.of(context).colorScheme.onPrimary,
             width: 2,
           ),
           borderRadius: BorderRadius.circular(10),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Theme.of(context).colorScheme.secondary,
+            color: Theme.of(context).colorScheme.onPrimary,
             width: 2,
           ),
           borderRadius: BorderRadius.circular(10),
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Theme.of(context).colorScheme.onSurface,
+            color: Theme.of(context).colorScheme.onPrimary,
             width: 1,
           ),
           borderRadius: BorderRadius.circular(9),
         ),
         disabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Theme.of(context).colorScheme.onSurface,
+            color: Theme.of(context).colorScheme.onPrimary,
             width: 2,
           ),
           borderRadius: BorderRadius.circular(9),
