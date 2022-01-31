@@ -96,7 +96,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                                   //       .requestFocus(passwordFocusNode);
                                   // },
                                 ),
-                                const Spacing.mediumHeight(),
+                                const Spacing.largeHeight(),
                                 Center(
                                   child: ReuseableElevatedButton(
                                       childText: 'Submit',
