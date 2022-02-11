@@ -1,20 +1,29 @@
 import 'dart:io';
-
+//import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import '../UI/authentication/model/user_params.dart';
+import 'user_service.dart';
 
 import 'base/failure.dart';
 
 class AuthenticationServices {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  // final User? _firebaseAuth2 = FirebaseAuth.instance.authStateChanges();
 
   final GoogleSignIn googleSignIn = GoogleSignIn();
 
   User? get loggedInUser => _firebaseAuth.currentUser;
 
-  Future<void> register({required UserParams params}) async {
+  //Setup Stream to detect user authentication state and passed the return value to the user model class to better construct the user
+  Stream<UserModel> get user {
+    return _firebaseAuth
+        .authStateChanges()
+        .map((User? user) => UserModel.fromFirebase(user));
+  }
+
+  Future<UserModel> register({required UserParams params}) async {
     try {
       final UserCredential _userCredential =
           await _firebaseAuth.createUserWithEmailAndPassword(
@@ -24,6 +33,7 @@ class AuthenticationServices {
       _userCredential.user!.updateDisplayName(params.fullName);
 
       await _userCredential.user!.sendEmailVerification();
+      return UserModel.fromFirebase(_userCredential.user);
     } on FirebaseAuthException catch (ex) {
       throw Failure(ex.message ?? 'Something went wrong!');
     } on SocketException catch (ex) {
@@ -31,7 +41,7 @@ class AuthenticationServices {
     }
   }
 
-  Future<void> login({
+  Future<UserModel> login({
     required String emailAddress,
     required String password,
   }) async {
@@ -46,12 +56,13 @@ class AuthenticationServices {
         await _firebaseAuth.signOut();
         throw Failure('Email is not verified, Pls Check Your Email');
       }
+      return UserModel.fromFirebase(_userCredential.user);
     } on FirebaseAuthException catch (ex) {
       throw Failure(ex.message ?? 'Something went wrong!');
     }
   }
 
-  Future<User?> loginWithGoogle() async {
+  Future loginWithGoogle() async {
     final googleSignInAccount = await googleSignIn.signIn();
 
     if (googleSignInAccount != null) {
@@ -66,7 +77,7 @@ class AuthenticationServices {
         final UserCredential _userCredential =
             await _firebaseAuth.signInWithCredential(credential);
 
-        return _userCredential.user;
+        return UserModel.fromFirebase(_userCredential.user);
       } on FirebaseAuthException catch (ex) {
         throw Failure(ex.message ?? 'Something went wrong!');
       }

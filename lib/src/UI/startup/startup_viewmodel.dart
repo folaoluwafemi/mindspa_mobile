@@ -3,9 +3,9 @@ import 'package:stacked/stacked.dart';
 
 import '../../services/authentication_services.dart';
 
-class StartupViewModel extends BaseViewModel {
+class StartupViewModel extends StreamViewModel {
   final _authenticationService = locator<AuthenticationServices>();
-  bool get currentUser => _authenticationService.loggedInUser == null;
-  bool? get newcurrentUser =>
-      _authenticationService.loggedInUser?.emailVerified;
+
+  @override
+  Stream get stream => _authenticationService.user;
 }

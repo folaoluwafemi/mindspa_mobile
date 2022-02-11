@@ -16,24 +16,28 @@ import '../UI/sleepandrelaxation/sleep_and_relaxation_view.dart';
 import '/src/services/authentication_services.dart';
 import '/src/services/snackbar_service.dart';
 
-@StackedApp(routes: [
-  MaterialRoute(page: OnboardingView),
-  MaterialRoute(page: LoginView),
-  MaterialRoute(page: RegisterView),
-  MaterialRoute(page: BottomNavigationView),
-  MaterialRoute(page: SleepAndRelaxationView),
-  MaterialRoute(page: NutritionView),
-  MaterialRoute(page: ExerciseView),
-  MaterialRoute(page: ForgotPasswordView),
-  MaterialRoute(page: VerifyEmailView),
-  MaterialRoute(page: SettingsView),
-  MaterialRoute(page: GetStartedView),
-  MaterialRoute(page: StartupView, initial: true)
-], dependencies: [
-  LazySingleton(classType: NavigationService),
-  LazySingleton(classType: SnackbarServices),
-  LazySingleton(classType: AuthenticationServices)
-])
+@StackedApp(
+  routes: [
+    MaterialRoute(page: OnboardingView),
+    MaterialRoute(page: LoginView),
+    MaterialRoute(page: RegisterView),
+    MaterialRoute(page: BottomNavigationView),
+    MaterialRoute(page: SleepAndRelaxationView),
+    MaterialRoute(page: NutritionView),
+    MaterialRoute(page: ExerciseView),
+    MaterialRoute(page: ForgotPasswordView),
+    MaterialRoute(page: VerifyEmailView),
+    MaterialRoute(page: SettingsView),
+    MaterialRoute(page: GetStartedView),
+    MaterialRoute(page: StartupView, initial: true)
+  ],
+  dependencies: [
+    LazySingleton(classType: NavigationService),
+    LazySingleton(classType: SnackbarServices),
+    LazySingleton(classType: AuthenticationServices),
+  ],
+  logger: StackedLogger(),
+)
 class AppSetup {
   //used to handle dependency injection
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mindspa_mobile/src/UI/authentication/views/login_view.dart';
 import 'package:mindspa_mobile/src/UI/bottom_navigation/view/bottom_navigation_view.dart';
-import 'package:mindspa_mobile/src/UI/onboarding/onboarding_view.dart';
 import 'package:mindspa_mobile/src/UI/startup/startup_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 
@@ -15,10 +15,11 @@ class StartupView extends StatelessWidget {
         BuildContext context,
         StartupViewModel model,
         Widget? child,
-      ) =>
-          model.currentUser
-              ? const OnboardingView()
-              : const BottomNavigationView(),
+      ) {
+        return model.data == null
+            ? const LoginView()
+            : const BottomNavigationView();
+      },
     );
   }
 }

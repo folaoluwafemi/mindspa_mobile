@@ -180,7 +180,7 @@ class _LoginViewState extends State<LoginView> {
                                           _formKey.currentState!.save();
                                           if (_formKey.currentState!
                                               .validate()) {
-                                            model.loginUser(
+                                            model.loginInWithEmailAndPassword(
                                               emailAddress:
                                                   emailAddressController.text
                                                       .trim(),

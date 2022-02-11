@@ -1,5 +1,4 @@
 import 'package:mindspa_mobile/src/app/app.locator.dart';
-import 'package:mindspa_mobile/src/app/app.router.dart';
 import 'package:mindspa_mobile/src/services/authentication_services.dart';
 import 'package:mindspa_mobile/src/services/base/failure.dart';
 import 'package:mindspa_mobile/src/services/snackbar_service.dart';
@@ -18,7 +17,7 @@ class SettingsViewModel extends BaseViewModel {
     setBusy(true);
     try {
       await _authenticationService.logout();
-      _navigationService.replaceWith(Routes.loginView);
+      _navigationService.back();
     } on Failure catch (ex) {
       _snackbarService.showErrorSnackBar(ex.message);
     }
