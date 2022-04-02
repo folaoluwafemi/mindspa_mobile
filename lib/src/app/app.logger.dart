@@ -114,9 +114,7 @@ class MultipleLoggerOutput extends LogOutput {
       try {
         logOutput.output(event);
       } catch (e) {
-        if (kDebugMode) {
-          print('Log output failed');
-        }
+        print('Log output failed');
       }
     }
   }

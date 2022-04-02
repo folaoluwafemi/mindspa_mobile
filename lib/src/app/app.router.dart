@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked/stacked_annotations.dart';
 
 import '../UI/articles/articles_view.dart';
 import '../UI/authentication/views/forgot_password_view.dart';
