@@ -1,7 +1,9 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 
-class ReuseableCircularProgressIndicator extends StatelessWidget {
-  const ReuseableCircularProgressIndicator({
+class LoadingIndicator extends StatelessWidget {
+  const LoadingIndicator({
     Key? key,
   }) : super(key: key);
 

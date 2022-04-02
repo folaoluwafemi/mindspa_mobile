@@ -1,13 +1,16 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mindspa_mobile/src/UI/mind_bot/mind_bot_viewmodel.dart';
 import 'package:mindspa_mobile/src/core/constant/app_colors.dart';
 import 'package:mindspa_mobile/src/core/constant/app_images.dart';
 import 'package:mindspa_mobile/src/core/constant/app_strings.dart';
-import 'package:mindspa_mobile/src/widgets/scaffold_decorator.dart';
-import 'package:mindspa_mobile/src/widgets/spacing.dart';
-import 'package:mindspa_mobile/src/widgets/statusbar.dart';
+import 'package:mindspa_mobile/src/UI/shared/smartwidgets/statusbar.dart';
 import 'package:stacked/stacked.dart';
+
+import '../shared/dumb_widgets/scaffold_decorator.dart';
+import '../shared/dumb_widgets/spacing.dart';
 
 class MindBotView extends StatelessWidget {
   const MindBotView({Key? key}) : super(key: key);
@@ -45,9 +48,9 @@ class MindBotView extends StatelessWidget {
                     Container(
                       width: double.infinity,
                       padding: const EdgeInsets.only(top: 30, bottom: 20),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.onSecondary,
-                        borderRadius: const BorderRadius.all(
+                      decoration: const BoxDecoration(
+                        color: AppColors.lightGreen,
+                        borderRadius: BorderRadius.all(
                           Radius.circular(10),
                         ),
                       ),

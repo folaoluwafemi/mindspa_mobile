@@ -1,6 +1,6 @@
 // ignore_for_file: use_key_in_widget_constructors
 
-import '../core/constant/app_ui_helpers.dart';
+import '../../../core/constant/app_ui_helpers.dart';
 import 'package:flutter/material.dart';
 
 class Spacing extends StatelessWidget {

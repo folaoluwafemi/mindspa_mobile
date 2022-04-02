@@ -1,13 +1,15 @@
+// ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
 import 'package:mindspa_mobile/src/UI/for_you/for_you_viewmodel.dart';
 import 'package:mindspa_mobile/src/core/constant/app_colors.dart';
 import 'package:mindspa_mobile/src/core/constant/app_images.dart';
 import 'package:mindspa_mobile/src/core/constant/app_strings.dart';
-import 'package:mindspa_mobile/src/widgets/scaffold_decorator.dart';
-import 'package:mindspa_mobile/src/widgets/spacing.dart';
-import 'package:mindspa_mobile/src/widgets/statusbar.dart';
+import 'package:mindspa_mobile/src/UI/shared/smartwidgets/statusbar.dart';
 import 'package:stacked/stacked.dart';
+
+import '../shared/dumb_widgets/scaffold_decorator.dart';
+import '../shared/dumb_widgets/spacing.dart';
 
 class ForYouView extends StatelessWidget {
   const ForYouView({Key? key}) : super(key: key);
@@ -52,7 +54,7 @@ class ForYouView extends StatelessWidget {
                         firstText: 'Read More',
                         secondText: AppStrings.articles,
                         imagePath: AppImages.forYouarticles,
-                        onTap: () {},
+                        onTap: model.goToArticleView,
                       ),
                       ForYouItems(
                         firstText: 'Watch',
@@ -96,9 +98,9 @@ class ForYouItems extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.onSecondary,
-          borderRadius: const BorderRadius.all(
+        decoration: const BoxDecoration(
+          color: AppColors.lightGreen,
+          borderRadius: BorderRadius.all(
             Radius.circular(10),
           ),
         ),
@@ -115,8 +117,7 @@ class ForYouItems extends StatelessWidget {
                   Text(
                     firstText,
                     style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                          color: Theme.of(context).colorScheme.secondaryVariant,
-                          fontWeight: FontWeight.bold,
+                          color: AppColors.white,
                           fontSize: 12,
                         ),
                   ),

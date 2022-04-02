@@ -1,8 +1,11 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mindspa_mobile/src/core/constant/app_images.dart';
 import 'package:mindspa_mobile/src/core/constant/app_strings.dart';
-import 'package:mindspa_mobile/src/widgets/spacing.dart';
+
+import '../shared/dumb_widgets/spacing.dart';
 
 class SleepAndRelaxationView extends StatelessWidget {
   const SleepAndRelaxationView({Key? key}) : super(key: key);
@@ -126,4 +129,3 @@ class SleepAndRelaxationView extends StatelessWidget {
     );
   }
 }
-

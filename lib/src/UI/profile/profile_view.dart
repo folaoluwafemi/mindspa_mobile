@@ -1,11 +1,14 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:mindspa_mobile/src/UI/profile/profile_viewmodel.dart';
 import 'package:mindspa_mobile/src/core/constant/app_colors.dart';
 import 'package:mindspa_mobile/src/core/constant/app_strings.dart';
-import 'package:mindspa_mobile/src/widgets/scaffold_decorator.dart';
-import 'package:mindspa_mobile/src/widgets/spacing.dart';
-import 'package:mindspa_mobile/src/widgets/statusbar.dart';
+import 'package:mindspa_mobile/src/UI/shared/smartwidgets/statusbar.dart';
 import 'package:stacked/stacked.dart';
+
+import '../shared/dumb_widgets/scaffold_decorator.dart';
+import '../shared/dumb_widgets/spacing.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({Key? key}) : super(key: key);
@@ -13,6 +16,7 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<ProfileViewModel>.reactive(
+      onModelReady: (model) => model.getUserDetails(),
       viewModelBuilder: () => ProfileViewModel(),
       builder: (
         BuildContext context,
@@ -39,9 +43,7 @@ class ProfileView extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 30.0, vertical: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
-                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    // const Spacing.bigHeight(),
                     Row(
                       children: [
                         Container(
@@ -105,6 +107,16 @@ class ProfileView extends StatelessWidget {
                           const CustomProfileNames(text: AppStrings.settings),
                     ),
                     const Spacing.smallHeight(),
+                    const Divider(
+                      color: AppColors.grey,
+                    ),
+                    const Spacing.smallHeight(),
+                    GestureDetector(
+                      onTap: () => model.signOut(),
+                      child: const CustomProfileNames(
+                        text: AppStrings.signOut,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -133,7 +145,7 @@ class CustomProfileNames extends StatelessWidget {
       style: Theme.of(context)
           .textTheme
           .headline4!
-          .copyWith(color: color ?? AppColors.light),
+          .copyWith(color: color ?? AppColors.white),
     );
   }
 }

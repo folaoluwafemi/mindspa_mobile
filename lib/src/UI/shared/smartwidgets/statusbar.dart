@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mindspa_mobile/src/core/constant/app_colors.dart';
 
 enum StatusbarType { light, dark }
 
@@ -28,7 +29,7 @@ class Statusbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnnotatedRegion(
       value: SystemUiOverlayStyle.light.copyWith(
-        statusBarColor: Theme.of(context).colorScheme.onSurface,
+        statusBarColor: AppColors.green,
         statusBarIconBrightness:
             statusbarType.isLight ? Brightness.dark : Brightness.light,
       ),

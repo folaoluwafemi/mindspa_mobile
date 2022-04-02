@@ -4,13 +4,14 @@ import 'package:mindspa_mobile/src/core/constant/app_colors.dart';
 import 'package:mindspa_mobile/src/core/constant/app_images.dart';
 import 'package:mindspa_mobile/src/core/constant/app_strings.dart';
 import 'package:mindspa_mobile/src/core/utilities/validation_extension.dart';
-import 'package:mindspa_mobile/src/widgets/reusable_circular_progress_indicator.dart';
-import 'package:mindspa_mobile/src/widgets/reusable_elevated_button.dart';
-import 'package:mindspa_mobile/src/widgets/reusable_text_field.dart';
-import 'package:mindspa_mobile/src/widgets/scaffold_decorator.dart';
-import 'package:mindspa_mobile/src/widgets/spacing.dart';
+
 import 'package:stacked/stacked.dart';
 
+import '../../shared/dumb_widgets/app_textfield.dart';
+import '../../shared/dumb_widgets/loading_indicator.dart';
+import '../../shared/dumb_widgets/app_elevated_button.dart';
+import '../../shared/dumb_widgets/scaffold_decorator.dart';
+import '../../shared/dumb_widgets/spacing.dart';
 import '../viewmodels/forgot_password_viewmodel.dart';
 
 class ForgotPasswordView extends StatefulWidget {
@@ -51,13 +52,13 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                 onPressed: () => Navigator.pop(context),
                 icon: const Icon(
                   Icons.arrow_back,
-                  color: AppColors.light,
+                  color: AppColors.white,
                 ),
               ),
             ),
             backgroundColor: Theme.of(context).colorScheme.primary,
             body: ScaffoldBackgroundDecorator(
-              backgroundImage: AppImages.auth,
+              backgroundImage: AppImages.scaffoldAuthImage1,
               child: SafeArea(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -65,7 +66,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                     child: Form(
                       key: _form,
                       child: model.isBusy
-                          ? const ReuseableCircularProgressIndicator()
+                          ? const LoadingIndicator()
                           : Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -86,7 +87,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                                   style: Theme.of(context).textTheme.headline4,
                                 ),
                                 const Spacing.smallHeight(),
-                                ReusableTextField(
+                                AppTextField(
                                   obsureText: false,
                                   controller: emailAddressController,
                                   validator: context.validateEmailAddress,
@@ -98,7 +99,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                                 ),
                                 const Spacing.largeHeight(),
                                 Center(
-                                  child: ReuseableElevatedButton(
+                                  child: AppElevatedButton(
                                       childText: 'Submit',
                                       onPressed: () async {
                                         FocusScope.of(context).unfocus();

@@ -1,23 +1,26 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:io';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:mindspa_mobile/src/UI/authentication/model/user_params.dart';
 import 'package:mindspa_mobile/src/UI/authentication/viewmodels/register_viemmodel.dart';
-import 'package:mindspa_mobile/src/widgets/reusable_circular_progress_indicator.dart';
-import 'package:mindspa_mobile/src/widgets/scaffold_decorator.dart';
-import 'package:mindspa_mobile/src/widgets/spacing.dart';
 
-import 'package:mindspa_mobile/src/widgets/statusbar.dart';
+import 'package:mindspa_mobile/src/UI/shared/smartwidgets/statusbar.dart';
 
 import '../../../core/utilities/validation_extension.dart';
 import 'package:mindspa_mobile/src/core/constant/app_images.dart';
 import 'package:mindspa_mobile/src/core/constant/app_strings.dart';
-import 'package:mindspa_mobile/src/widgets/external_auth_button.dart';
-import 'package:mindspa_mobile/src/widgets/reusable_elevated_button.dart';
-import 'package:mindspa_mobile/src/widgets/reusable_text_field.dart';
 
 import 'package:stacked/stacked.dart';
+
+import '../../shared/dumb_widgets/app_textfield.dart';
+import '../../shared/dumb_widgets/external_auth_button.dart';
+import '../../shared/dumb_widgets/loading_indicator.dart';
+import '../../shared/dumb_widgets/app_elevated_button.dart';
+import '../../shared/dumb_widgets/scaffold_decorator.dart';
+import '../../shared/dumb_widgets/spacing.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({Key? key}) : super(key: key);
@@ -49,7 +52,7 @@ class _RegisterViewState extends State<RegisterView> {
                 backgroundColor: Theme.of(context).colorScheme.primaryVariant,
                 extendBodyBehindAppBar: true,
                 body: ScaffoldBackgroundDecorator(
-                  backgroundImage: AppImages.auth,
+                  backgroundImage: AppImages.scaffoldAuthImage1,
                   child: SafeArea(
                     child: Form(
                       key: _formKey,
@@ -58,7 +61,7 @@ class _RegisterViewState extends State<RegisterView> {
                           padding: const EdgeInsets.symmetric(
                               vertical: 10, horizontal: 34),
                           child: model.isBusy
-                              ? const ReuseableCircularProgressIndicator()
+                              ? const LoadingIndicator()
                               : Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -79,7 +82,7 @@ class _RegisterViewState extends State<RegisterView> {
 
                                     ///FullName
                                     ///
-                                    ReusableTextField(
+                                    AppTextField(
                                       obsureText: false,
                                       controller: fullNameController,
                                       validator: context.validateFullName,
@@ -95,7 +98,7 @@ class _RegisterViewState extends State<RegisterView> {
                                           Theme.of(context).textTheme.headline4,
                                     ),
                                     const Spacing.smallHeight(),
-                                    ReusableTextField(
+                                    AppTextField(
                                       obsureText: false,
                                       controller: emailAddressController,
                                       validator: context.validateEmailAddress,
@@ -115,7 +118,7 @@ class _RegisterViewState extends State<RegisterView> {
                                           Theme.of(context).textTheme.headline4,
                                     ),
                                     const Spacing.smallHeight(),
-                                    ReusableTextField(
+                                    AppTextField(
                                       obsureText: model.obscurePassword,
                                       icon: IconButton(
                                         icon: Icon(
@@ -168,7 +171,7 @@ class _RegisterViewState extends State<RegisterView> {
                                     ),
                                     //Sign Up Button
                                     Center(
-                                      child: ReuseableElevatedButton(
+                                      child: AppElevatedButton(
                                         childText: AppStrings.signUp,
                                         onPressed: () async {
                                           _formKey.currentState!.save();

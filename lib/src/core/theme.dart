@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mindspa_mobile/src/core/constant/app_colors.dart';
@@ -34,7 +36,7 @@ class AppTheme {
     secondaryVariant: AppColors.grey,
     onSurface: AppColors.lightGreenVariant,
     surface: AppColors.linksColor,
-    primaryVariant: AppColors.light,
+    primaryVariant: AppColors.white,
     onSecondary: AppColors.warmBlue,
   );
 

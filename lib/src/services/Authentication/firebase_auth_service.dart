@@ -1,28 +1,28 @@
 import 'dart:io';
-//import 'package:firebase_core/firebase_core.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import '../UI/authentication/model/user_params.dart';
-import 'user_service.dart';
+import 'package:mindspa_mobile/src/services/Authentication/auth_service.dart';
 
-import 'base/failure.dart';
+import '../../UI/authentication/model/user_params.dart';
+import '../../models/user_model.dart';
+import '../base/failure.dart';
 
-class AuthenticationServices {
+class FirebaseAuthService extends AuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  // final User? _firebaseAuth2 = FirebaseAuth.instance.authStateChanges();
 
   final GoogleSignIn googleSignIn = GoogleSignIn();
 
   User? get loggedInUser => _firebaseAuth.currentUser;
 
   //Setup Stream to detect user authentication state and passed the return value to the user model class to better construct the user
-  Stream<UserModel> get user {
-    return _firebaseAuth
-        .authStateChanges()
-        .map((User? user) => UserModel.fromFirebase(user));
+  @override
+  Stream get user {
+    return _firebaseAuth.authStateChanges();
   }
 
+  @override
   Future<UserModel> register({required UserParams params}) async {
     try {
       final UserCredential _userCredential =
@@ -33,7 +33,7 @@ class AuthenticationServices {
       _userCredential.user!.updateDisplayName(params.fullName);
 
       await _userCredential.user!.sendEmailVerification();
-      return UserModel.fromFirebase(_userCredential.user);
+      return UserModel.fromDatabase(_userCredential.user);
     } on FirebaseAuthException catch (ex) {
       throw Failure(ex.message ?? 'Something went wrong!');
     } on SocketException catch (ex) {
@@ -41,27 +41,22 @@ class AuthenticationServices {
     }
   }
 
-  Future<UserModel> login({
-    required String emailAddress,
-    required String password,
-  }) async {
+  @override
+  Future<UserModel> login({required UserParams params}) async {
     try {
       final UserCredential _userCredential =
           await _firebaseAuth.signInWithEmailAndPassword(
-        email: emailAddress,
-        password: password,
+        email: params.emailAddress,
+        password: params.password,
       );
 
-      if (!_userCredential.user!.emailVerified) {
-        await _firebaseAuth.signOut();
-        throw Failure('Email is not verified, Pls Check Your Email');
-      }
-      return UserModel.fromFirebase(_userCredential.user);
+      return UserModel.fromDatabase(_userCredential.user);
     } on FirebaseAuthException catch (ex) {
       throw Failure(ex.message ?? 'Something went wrong!');
     }
   }
 
+  @override
   Future loginWithGoogle() async {
     final googleSignInAccount = await googleSignIn.signIn();
 
@@ -77,40 +72,14 @@ class AuthenticationServices {
         final UserCredential _userCredential =
             await _firebaseAuth.signInWithCredential(credential);
 
-        return UserModel.fromFirebase(_userCredential.user);
+        return UserModel.fromDatabase(_userCredential.user);
       } on FirebaseAuthException catch (ex) {
         throw Failure(ex.message ?? 'Something went wrong!');
       }
     }
   }
 
-  Future<void> sendVerificationEmail() async {
-    try {
-      final user = _firebaseAuth.currentUser;
-      await user?.sendEmailVerification();
-    } on FirebaseAuthException catch (ex) {
-      throw Failure(ex.message ?? 'Something went wrong!');
-    } on SocketException catch (ex) {
-      throw Failure(
-          'You are not connected to the internet\n Error: ${ex.message}');
-    } catch (ex) {
-      throw Failure(ex.toString());
-    }
-  }
-
-  Future<void> checkVerificationAccount() async {
-    try {
-      await _firebaseAuth.currentUser?.reload();
-    } on SocketException catch (ex) {
-      throw Failure(
-          'You are not connected to the internet\n Error: ${ex.message}');
-    } on FirebaseException catch (ex) {
-      throw Failure('Unable to verify email\n Error: ${ex.message}');
-    } catch (ex) {
-      ex.toString();
-    }
-  }
-
+  @override
   Future<void> resetPassword(String emailAddress) async {
     try {
       await _firebaseAuth.sendPasswordResetEmail(email: emailAddress);
@@ -119,6 +88,7 @@ class AuthenticationServices {
     }
   }
 
+  @override
   Future<void> updateUser({required String fullName}) async {
     try {
       await loggedInUser?.updateDisplayName(fullName);
@@ -127,6 +97,7 @@ class AuthenticationServices {
     }
   }
 
+  @override
   Future<void> updateEmail({
     required String newEmailAddress,
     required String password,
@@ -147,6 +118,7 @@ class AuthenticationServices {
     }
   }
 
+  @override
   Future<void> updatePassword({
     required String oldPassword,
     required String newPassword,
@@ -165,10 +137,27 @@ class AuthenticationServices {
     }
   }
 
+  @override
   Future<void> logout() async {
     if (!kIsWeb) {
       await googleSignIn.signOut();
     }
     await _firebaseAuth.signOut();
+  }
+
+  @override
+  Future<UserModel> getUserDetails() async {
+    try {
+      User? user = _firebaseAuth.currentUser;
+      return UserModel.fromDatabase(user);
+    } on FirebaseAuthException catch (e) {
+      throw Failure(e.message.toString());
+    } on FirebaseException catch (e) {
+      throw Failure(e.message.toString());
+    } on SocketException catch (e) {
+      throw Failure(e.message);
+    } catch (e) {
+      throw Failure(e.toString());
+    }
   }
 }

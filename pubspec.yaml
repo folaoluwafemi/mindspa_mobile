@@ -22,6 +22,8 @@ dependencies:
   stacked: ^2.2.8
   stacked_services: ^0.8.16
   logger: ^1.1.0
+  smooth_page_indicator: ^1.0.0+2
+  shared_preferences: ^2.0.13
 
 dev_dependencies:
   build_runner: ^2.1.7
@@ -31,10 +33,11 @@ dev_dependencies:
   stacked_generator: ^0.5.7
 
 flutter_native_splash:
-  color: "#ffffff"
-  image: assets/png/Mind-Spa_the_logo.png
+  color: "#53796A"
+  image: assets/png/splash_screen.png
   android: true
   ios: true
+  android_gravity: fill
 
 flutter:
   uses-material-design: true

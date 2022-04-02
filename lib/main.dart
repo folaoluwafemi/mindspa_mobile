@@ -5,7 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:mindspa_mobile/src/core/constant/app_strings.dart';
 import 'package:mindspa_mobile/src/core/theme.dart';
 
-import 'package:mindspa_mobile/src/services/snackbar_service.dart';
+import 'package:mindspa_mobile/src/services/snackbar_services.dart';
 
 import 'package:stacked_services/stacked_services.dart';
 
@@ -13,7 +13,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp();
-  setupLocator();
+  await setupLocator();
   runApp(const MyApp());
 }
 

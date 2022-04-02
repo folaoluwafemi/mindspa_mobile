@@ -2,12 +2,12 @@ import 'package:mindspa_mobile/src/app/app.locator.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-import '../../../services/authentication_services.dart';
+import '../../../services/Authentication/auth_service.dart';
 import '../../../services/base/failure.dart';
-import '../../../services/snackbar_service.dart';
+import '../../../services/snackbar_services.dart';
 
 class ForgotPasswordViewModel extends BaseViewModel {
-  final _authenticationService = locator<AuthenticationServices>();
+  final _authenticationService = locator<AuthService>();
   final _snackbarService = locator<SnackbarServices>();
   final _navigationService = locator<NavigationService>();
   Future<void> resetPassword(String emailAddress) async {
