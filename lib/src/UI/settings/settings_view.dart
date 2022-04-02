@@ -1,12 +1,15 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mindspa_mobile/src/UI/settings/settings_viewmodel.dart';
 import 'package:mindspa_mobile/src/core/constant/app_images.dart';
 import 'package:mindspa_mobile/src/core/constant/app_strings.dart';
-import 'package:mindspa_mobile/src/widgets/reusable_circular_progress_indicator.dart';
-import 'package:mindspa_mobile/src/widgets/scaffold_decorator.dart';
-import 'package:mindspa_mobile/src/widgets/statusbar.dart';
+import 'package:mindspa_mobile/src/UI/shared/smartwidgets/statusbar.dart';
 import 'package:stacked/stacked.dart';
+
+import '../shared/dumb_widgets/loading_indicator.dart';
+import '../shared/dumb_widgets/scaffold_decorator.dart';
 
 class SettingsView extends StatelessWidget {
   const SettingsView({Key? key}) : super(key: key);
@@ -46,7 +49,7 @@ class SettingsView extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(
                       horizontal: 30.0, vertical: 15),
                   child: model.isBusy
-                      ? const ReuseableCircularProgressIndicator()
+                      ? const LoadingIndicator()
                       : Column(
                           children: [
                             const ReusableListTile(

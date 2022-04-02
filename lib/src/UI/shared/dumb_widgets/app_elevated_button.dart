@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class ReuseableElevatedButton extends StatelessWidget {
+class AppElevatedButton extends StatelessWidget {
   final String childText;
   final VoidCallback onPressed;
-  const ReuseableElevatedButton({
+  const AppElevatedButton({
     Key? key,
     required this.childText,
     required this.onPressed,

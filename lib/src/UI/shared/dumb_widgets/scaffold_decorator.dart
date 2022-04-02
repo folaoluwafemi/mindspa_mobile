@@ -20,7 +20,7 @@ class ScaffoldBackgroundDecorator extends StatelessWidget {
           color: Theme.of(context).colorScheme.onSurface,
           image: DecorationImage(
             image: AssetImage(
-              backgroundImage ?? AppImages.scaffoldImage1,
+              backgroundImage ?? AppImages.scaffoldAuthImage1,
             ),
             opacity: 0.10,
             fit: BoxFit.fill,

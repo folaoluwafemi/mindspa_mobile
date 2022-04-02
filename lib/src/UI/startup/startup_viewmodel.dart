@@ -1,11 +1,19 @@
 import 'package:mindspa_mobile/src/app/app.locator.dart';
+import 'package:mindspa_mobile/src/core/constant/app_local_storage_keys.dart';
+import 'package:mindspa_mobile/src/services/local%20storage/local_storage_service.dart';
 import 'package:stacked/stacked.dart';
 
-import '../../services/authentication_services.dart';
+import '../../services/Authentication/auth_service.dart';
 
-class StartupViewModel extends BaseViewModel {
-  final _authenticationService = locator<AuthenticationServices>();
-  bool get currentUser => _authenticationService.loggedInUser == null;
-  bool? get newcurrentUser =>
-      _authenticationService.loggedInUser?.emailVerified;
+class StartupViewModel extends StreamViewModel {
+  final _authenticationService = locator<AuthService>();
+  final _localStorageService = locator<LocalStorageService>();
+
+  onInit() {
+    return _localStorageService.getFromDisk(AppLocalStoragekeys.newUser) ??
+        true;
+  }
+
+  @override
+  Stream get stream => _authenticationService.user;
 }

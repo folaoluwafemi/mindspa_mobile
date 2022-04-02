@@ -25,7 +25,7 @@ class AppImages {
   static const appleLogo = 'assets/svg/icons8-apple-logo.svg';
 
   ///Authentication Background
-  static const auth = 'assets/png/authbackground.png';
+  static const scaffoldAuthImage1 = 'assets/png/authbackground.png';
 
   /// Home Avatar
   static const homeAvatar1 = "assets/svg/amico.svg";

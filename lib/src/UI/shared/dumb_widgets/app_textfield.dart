@@ -1,6 +1,8 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 
-class ReusableTextField extends StatelessWidget {
+class AppTextField extends StatelessWidget {
   final TextInputAction? textInputAction;
   final FocusNode? focusNode;
   final TextEditingController? controller;
@@ -8,7 +10,7 @@ class ReusableTextField extends StatelessWidget {
   final String? Function(String?)? validator;
   final Widget? icon;
   final bool obsureText;
-  const ReusableTextField(
+  const AppTextField(
       {Key? key,
       this.textInputAction,
       this.focusNode,

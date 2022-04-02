@@ -1,15 +1,16 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:mindspa_mobile/src/UI/home/home_viewmodel.dart';
 import 'package:mindspa_mobile/src/core/constant/app_images.dart';
 import 'package:mindspa_mobile/src/core/constant/app_strings.dart';
 import 'package:mindspa_mobile/src/core/constant/app_ui_helpers.dart';
-import 'package:mindspa_mobile/src/widgets/scaffold_decorator.dart';
-
-import 'package:mindspa_mobile/src/widgets/spacing.dart';
-import 'package:mindspa_mobile/src/widgets/statusbar.dart';
+import 'package:mindspa_mobile/src/UI/shared/smartwidgets/statusbar.dart';
 
 import 'package:stacked/stacked.dart';
 
+import '../shared/dumb_widgets/scaffold_decorator.dart';
+import '../shared/dumb_widgets/spacing.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -21,7 +22,8 @@ class _HomeViewState extends State<HomeView> {
   var searchFieldController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<HomeViewModel>.nonReactive(
+    return ViewModelBuilder<HomeViewModel>.reactive(
+      onModelReady: (model) => model.getUserDetails(),
       viewModelBuilder: () => HomeViewModel(),
       builder: (
         BuildContext context,
@@ -44,7 +46,7 @@ class _HomeViewState extends State<HomeView> {
                       children: [
                         FittedBox(
                           child: Text(
-                            '${AppStrings.welcome} ${model.currentUserdisplayname}',
+                            '${AppStrings.welcome} ${model.currentUserdisplayname ?? ''}',
                             style: Theme.of(context).textTheme.headline1,
                           ),
                         ),
@@ -85,6 +87,7 @@ class _HomeViewState extends State<HomeView> {
                         Flexible(
                           child: SizedBox(
                             child: GridView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               gridDelegate:
                                   const SliverGridDelegateWithFixedCrossAxisCount(

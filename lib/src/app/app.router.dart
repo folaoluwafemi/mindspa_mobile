@@ -8,14 +8,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked/stacked_annotations.dart';
 
+import '../UI/articles/articles_view.dart';
 import '../UI/authentication/views/forgot_password_view.dart';
 import '../UI/authentication/views/login_view.dart';
 import '../UI/authentication/views/register_view.dart';
-import '../UI/authentication/views/verify_email_view.dart';
-import '../UI/bottom_navigation/view/bottom_navigation_view.dart';
 import '../UI/exercise/exercise_view.dart';
-import '../UI/get%20started/get_started_view.dart';
+import '../UI/landing_page/landing_page_view.dart';
 import '../UI/nutrition/nutrition_view.dart';
 import '../UI/onboarding/onboarding_view.dart';
 import '../UI/settings/settings_view.dart';
@@ -26,28 +26,26 @@ class Routes {
   static const String onboardingView = '/onboarding-view';
   static const String loginView = '/login-view';
   static const String registerView = '/register-view';
-  static const String bottomNavigationView = '/bottom-navigation-view';
+  static const String landingPageView = '/landing-page-view';
   static const String sleepAndRelaxationView = '/sleep-and-relaxation-view';
   static const String nutritionView = '/nutrition-view';
   static const String exerciseView = '/exercise-view';
   static const String forgotPasswordView = '/forgot-password-view';
-  static const String verifyEmailView = '/verify-email-view';
   static const String settingsView = '/settings-view';
-  static const String getStartedView = '/get-started-view';
   static const String startupView = '/';
+  static const String articlesView = '/articles-view';
   static const all = <String>{
     onboardingView,
     loginView,
     registerView,
-    bottomNavigationView,
+    landingPageView,
     sleepAndRelaxationView,
     nutritionView,
     exerciseView,
     forgotPasswordView,
-    verifyEmailView,
     settingsView,
-    getStartedView,
     startupView,
+    articlesView,
   };
 }
 
@@ -58,15 +56,14 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.onboardingView, page: OnboardingView),
     RouteDef(Routes.loginView, page: LoginView),
     RouteDef(Routes.registerView, page: RegisterView),
-    RouteDef(Routes.bottomNavigationView, page: BottomNavigationView),
+    RouteDef(Routes.landingPageView, page: LandingPageView),
     RouteDef(Routes.sleepAndRelaxationView, page: SleepAndRelaxationView),
     RouteDef(Routes.nutritionView, page: NutritionView),
     RouteDef(Routes.exerciseView, page: ExerciseView),
     RouteDef(Routes.forgotPasswordView, page: ForgotPasswordView),
-    RouteDef(Routes.verifyEmailView, page: VerifyEmailView),
     RouteDef(Routes.settingsView, page: SettingsView),
-    RouteDef(Routes.getStartedView, page: GetStartedView),
     RouteDef(Routes.startupView, page: StartupView),
+    RouteDef(Routes.articlesView, page: ArticlesView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -89,9 +86,9 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
-    BottomNavigationView: (data) {
+    LandingPageView: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => const BottomNavigationView(),
+        builder: (context) => const LandingPageView(),
         settings: data,
       );
     },
@@ -119,27 +116,21 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
-    VerifyEmailView: (data) {
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => const VerifyEmailView(),
-        settings: data,
-      );
-    },
     SettingsView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const SettingsView(),
         settings: data,
       );
     },
-    GetStartedView: (data) {
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => const GetStartedView(),
-        settings: data,
-      );
-    },
     StartupView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const StartupView(),
+        settings: data,
+      );
+    },
+    ArticlesView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const ArticlesView(),
         settings: data,
       );
     },

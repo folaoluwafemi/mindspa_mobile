@@ -1,16 +1,22 @@
+import 'package:mindspa_mobile/src/UI/authentication/model/user_params.dart';
 import 'package:mindspa_mobile/src/app/app.locator.dart';
+import 'package:mindspa_mobile/src/app/app.logger.dart';
 import 'package:mindspa_mobile/src/app/app.router.dart';
+
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import '../../../services/base/failure.dart';
-import '../../../services/authentication_services.dart';
-import '../../../services/snackbar_service.dart';
+import '../../../services/Authentication/auth_service.dart';
+import '../../../services/snackbar_services.dart';
+import '../../../models/user_model.dart';
 
 class LoginViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _snackbarService = locator<SnackbarServices>();
-  final _authenticationService = locator<AuthenticationServices>();
+  final _authenticationService = locator<AuthService>();
+  final log = getLogger('Login View Model');
+  // final _userService = locator<Users>();
 
   bool _obsurePassword = true;
 
@@ -25,40 +31,35 @@ class LoginViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future<void> loginUser({
-    required String emailAddress,
-    required String password,
-  }) async {
+  Future<void> loginInWithEmailAndPassword(
+      {required UserParams userParams}) async {
     setBusy(true);
     try {
-      await _authenticationService.login(
-        emailAddress: emailAddress.trim(),
-        password: password,
+      UserModel result = await _authenticationService.login(
+        params: userParams,
       );
-      if (_authenticationService.loggedInUser?.emailVerified == false) {
-        _navigationService.replaceWith(
-          Routes.verifyEmailView,
-        );
-      } else {
-        _navigationService.replaceWith(Routes.bottomNavigationView);
-      }
+      log.i(result.uid);
     } on Failure catch (ex) {
       _snackbarService.showErrorSnackBar(ex.message);
+    } finally {
+      setBusy(false);
     }
-    setBusy(false);
+  }
+
+  void goback() {
+    _navigationService.replaceWith(Routes.registerView);
   }
 
   Future<void> loginUserWithGoogle() async {
+    setBusy(true);
     try {
-      final user = await _authenticationService.loginWithGoogle();
-
-      if (user != null) {
-        _navigationService.replaceWith(Routes.bottomNavigationView);
-      } else {
-        _snackbarService.showErrorSnackBar('No email selected');
-      }
+      UserModel result = await _authenticationService.loginWithGoogle();
+      log.i(result.uid);
+      _navigationService.clearStackAndShow(Routes.startupView);
     } on Failure catch (ex) {
       _snackbarService.showErrorSnackBar(ex.message);
+    } finally {
+      setBusy(false);
     }
   }
 

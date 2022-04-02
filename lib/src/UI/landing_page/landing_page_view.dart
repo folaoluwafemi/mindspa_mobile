@@ -1,6 +1,7 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mindspa_mobile/src/UI/bottom_navigation/view/bottom_navigation_viewmodel.dart';
 import 'package:mindspa_mobile/src/UI/for_you/for_you_view.dart';
 
 import 'package:mindspa_mobile/src/UI/home/home_view.dart';
@@ -8,20 +9,22 @@ import 'package:mindspa_mobile/src/UI/mind_bot/mind_bot_view.dart';
 import 'package:mindspa_mobile/src/UI/profile/profile_view.dart';
 import 'package:mindspa_mobile/src/core/constant/app_images.dart';
 import 'package:mindspa_mobile/src/core/constant/app_strings.dart';
-import 'package:mindspa_mobile/src/widgets/statusbar.dart';
+import 'package:mindspa_mobile/src/UI/shared/smartwidgets/statusbar.dart';
 
 import 'package:stacked/stacked.dart';
 
-class BottomNavigationView extends StatelessWidget {
-  const BottomNavigationView({Key? key}) : super(key: key);
+import 'landing_page_viewmodel.dart';
+
+class LandingPageView extends StatelessWidget {
+  const LandingPageView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<BottomNavigationViewModel>.reactive(
-      viewModelBuilder: () => BottomNavigationViewModel(),
+    return ViewModelBuilder<LandingPageViewModel>.reactive(
+      viewModelBuilder: () => LandingPageViewModel(),
       builder: (
         BuildContext context,
-        BottomNavigationViewModel model,
+        LandingPageViewModel model,
         Widget? child,
       ) {
         return WillPopScope(

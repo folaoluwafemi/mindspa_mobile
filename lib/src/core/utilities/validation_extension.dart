@@ -13,6 +13,7 @@ extension ValidationExtension on BuildContext {
     if (value.isEmpty) return 'Field cannot be empty';
 
     if (value.split('').length < 2) return 'Please enter your FULL NAME';
+    return null;
   }
 
   String? validateEmailAddress(String? value) {
