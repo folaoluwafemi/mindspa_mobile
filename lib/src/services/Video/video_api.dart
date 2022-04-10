@@ -1,11 +1,16 @@
 abstract class VideoApi {
-  dynamic getVideosByCategory();
+  dynamic getResponse(
+    bool isVideoList, {
+    String chart = '',
+    String topicId = '',
+    String q = '',
+    String pageToken = '',
+  });
 
   dynamic getVideos();
 
-  dynamic getVideosById();
-
-  dynamic searchVideos();
-
-  dynamic userAuth();
+  dynamic searchVideos({
+    String q = '',
+    String topicId = '',
+  });
 }

@@ -1,5 +1,6 @@
 import 'package:mindspa_mobile/src/app/app.locator.dart';
 import 'package:mindspa_mobile/src/core/constant/app_local_storage_keys.dart';
+import 'package:mindspa_mobile/src/services/Video/youtube_api.dart';
 import 'package:mindspa_mobile/src/services/local%20storage/local_storage_service.dart';
 import 'package:stacked/stacked.dart';
 
@@ -10,6 +11,7 @@ class StartupViewModel extends StreamViewModel {
   final _localStorageService = locator<LocalStorageService>();
 
   onInit() {
+    YoutubeApi().getVideos();
     return _localStorageService.getFromDisk(AppLocalStoragekeys.newUser) ??
         true;
   }
