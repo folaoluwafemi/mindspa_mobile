@@ -2,21 +2,19 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart';
-import 'package:mindspa_mobile/src/app/app.locator.dart';
-import 'package:mindspa_mobile/src/app/app.logger.dart';
-import 'package:mindspa_mobile/src/core/constant/youtube_api_strings.dart';
 import 'package:mindspa_mobile/src/core/utilities/keys.dart';
-import 'package:mindspa_mobile/src/models/video/video_model.dart';
 import 'package:mindspa_mobile/src/services/Video/video_api.dart';
-import 'package:mindspa_mobile/src/services/base/failure.dart';
+
+import '../../app/app.logger.dart';
+import '../../core/constant/youtube_api_strings.dart';
+import '../../models/video/video_model.dart';
+import '../base/failure.dart';
 
 class YoutubeApi implements VideoApi {
   final Client client = Client();
   final _log = getLogger('YoutubeApi');
-  String nextPageToken = '';
-  String prevPageToken = '';
-
-  ///parent topic for all types of music
+  String? nextPageToken = '';
+  String? prevPageToken = '';
 
   @override
   Future<Response> getResponse(
@@ -30,19 +28,19 @@ class YoutubeApi implements VideoApi {
     String chart = '',
 
     /// for search only
-    String topicId = '',
+    String topicId = lifestyleTopic,
     String q = '',
   }) async {
     String urlHead = scheme + subDomain + secondLevel + topLevel + path;
 
-    Uri videoListUrl = Uri.parse(urlHead + '/videos?part=$part&chart=$chart');
+    Uri videoListUrl = Uri.parse(
+        urlHead + '/videos?part=$part&maxResult=10&chart=$chart&key=$API_KEY');
     Uri videoSearchUrl = Uri.parse(urlHead +
         '/search?part=snippet&pageToken=$pageToken&safeSearch=strict&topicId=$topicId&type=video&q=$q&key=$API_KEY');
 
     Uri url = (isVideoList) ? videoListUrl : videoSearchUrl;
 
     return await client.get(url, headers: {
-      'Authorization': 'Bearer $API_KEY',
       'Accept': 'application/json',
     });
   }
@@ -60,18 +58,20 @@ class YoutubeApi implements VideoApi {
       }
 
       Map<String, dynamic> result = jsonDecode(response.body);
-
       nextPageToken = result['nextPageToken'];
-      prevPageToken = result['prevPageToken'];
 
-      List<Map<String, dynamic>> rawVideos = result['items'];
+      List<dynamic> rawVideos = result['items'] as List<dynamic>;
 
       List<VideoModel> videos = [];
 
-      for (var elements in rawVideos) {
-        VideoModel video = VideoModel.fromMap(elements);
-        videos.add(video);
-        _log.d(video);
+      for (var element in rawVideos) {
+        try {
+          VideoModel video = VideoModel.fromMap(element);
+          videos.add(video);
+          _log.d(video);
+        } catch (e) {
+          throw Failure(e.toString());
+        }
       }
 
       return videos;
@@ -98,17 +98,15 @@ class YoutubeApi implements VideoApi {
       }
 
       Map<String, dynamic> rawSearchResult = jsonDecode(response.body);
-
+      _log.d(response.body);
       nextPageToken = rawSearchResult['nextPageToken'];
       prevPageToken = rawSearchResult['prevPageToken'];
-
-      List<Map<String, dynamic>> rawVideoList = rawSearchResult['items'];
+      List<dynamic> rawVideoList = rawSearchResult['items'] as List<dynamic>;
       List<VideoModel> videoList = [];
-
       for (var element in rawVideoList) {
         videoList.add(VideoModel.fromSearchMap(element));
       }
-
+      _log.d(videoList);
       return videoList;
     } on SocketException {
       throw Failure('check internet connection and try again');

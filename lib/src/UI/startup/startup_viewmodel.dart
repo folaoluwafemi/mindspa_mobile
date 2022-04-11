@@ -11,7 +11,6 @@ class StartupViewModel extends StreamViewModel {
   final _localStorageService = locator<LocalStorageService>();
 
   onInit() {
-    YoutubeApi().getVideos();
     return _localStorageService.getFromDisk(AppLocalStoragekeys.newUser) ??
         true;
   }
