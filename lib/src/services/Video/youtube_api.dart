@@ -13,8 +13,8 @@ import '../base/failure.dart';
 class YoutubeApi implements VideoApi {
   final Client client = Client();
   final _log = getLogger('YoutubeApi');
-  String? nextPageToken = '';
-  String? prevPageToken = '';
+  String _searchNextPageToken = '';
+  String _videosNextPageToken = '';
 
   @override
   Future<Response> getResponse(
@@ -22,7 +22,6 @@ class YoutubeApi implements VideoApi {
 
     /// for video and  search
     String part = 'snippet',
-    String pageToken = '',
 
     /// for video only
     String chart = '',
@@ -32,11 +31,10 @@ class YoutubeApi implements VideoApi {
     String q = '',
   }) async {
     String urlHead = scheme + subDomain + secondLevel + topLevel + path;
-
     Uri videoListUrl = Uri.parse(
-        urlHead + '/videos?part=$part&maxResult=10&chart=$chart&key=$API_KEY');
+        urlHead + '/videos?part=$part&maxResult=10&pageToken=$_videosNextPageToken&chart=$chart&key=$API_KEY');
     Uri videoSearchUrl = Uri.parse(urlHead +
-        '/search?part=snippet&pageToken=$pageToken&safeSearch=strict&topicId=$topicId&type=video&q=$q&key=$API_KEY');
+        '/search?part=snippet&pageToken=$_searchNextPageToken&safeSearch=strict&topicId=$topicId&type=video&q=$q&key=$API_KEY');
 
     Uri url = (isVideoList) ? videoListUrl : videoSearchUrl;
 
@@ -58,8 +56,7 @@ class YoutubeApi implements VideoApi {
       }
 
       Map<String, dynamic> result = jsonDecode(response.body);
-      nextPageToken = result['nextPageToken'];
-
+      _videosNextPageToken = result['nextPageToken'];
       List<dynamic> rawVideos = result['items'] as List<dynamic>;
 
       List<VideoModel> videos = [];
@@ -98,9 +95,7 @@ class YoutubeApi implements VideoApi {
       }
 
       Map<String, dynamic> rawSearchResult = jsonDecode(response.body);
-      _log.d(response.body);
-      nextPageToken = rawSearchResult['nextPageToken'];
-      prevPageToken = rawSearchResult['prevPageToken'];
+      _searchNextPageToken = rawSearchResult['nextPageToken'];
       List<dynamic> rawVideoList = rawSearchResult['items'] as List<dynamic>;
       List<VideoModel> videoList = [];
       for (var element in rawVideoList) {

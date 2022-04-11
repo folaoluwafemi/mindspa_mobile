@@ -4,7 +4,6 @@ abstract class VideoApi {
     String chart = '',
     String topicId = '',
     String q = '',
-    String pageToken = '',
   });
 
   dynamic getVideos();
