@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mindspa_mobile/src/UI/authentication/views/login_view.dart';
+import 'package:mindspa_mobile/src/services/Video/youtube_api.dart';
 
 import 'package:stacked/stacked.dart';
 
